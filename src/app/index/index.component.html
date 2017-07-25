@@ -1,5 +1,6 @@
 <app-component-viewer [componentName]="'Generate Release Email'">
-  <md-card>
+  <!--Run-profiles-->
+  <md-card id="run-profile">
     <md-card-title>
       <div class="flex">
         <span class="title">
@@ -13,13 +14,14 @@
     </md-card-title>
     <md-card-subtitle>{{baserUrl}}</md-card-subtitle>
     <md-card-content>
-      <md-progress-spinner *ngIf="isLoading" [mode]="'indeterminate'" color="accent" [strokeWidth]="5">
+      <md-progress-spinner *ngIf="isLoading" [mode]="'indeterminate'" color="accent" [strokeWidth]="7" ngClass="loader">
       </md-progress-spinner>
       <div class="profile-details" [innerHTML]="sanitizer.bypassSecurityTrustHtml(runProfiles)" *ngIf="runProfiles">
       </div>
     </md-card-content>
   </md-card>
-  <md-card>
+  <!--Jira stories-->
+  <md-card id="jira">
     <md-card-title>
       <div class="flex">
         <span class="title">
@@ -33,17 +35,37 @@
     </md-card-title>
     <md-card-subtitle>{{sprint}}</md-card-subtitle>
     <md-card-content>
-      <md-progress-spinner *ngIf="!stories" [mode]="'indeterminate'" color="accent" [strokeWidth]="5">
+      <md-progress-spinner *ngIf="!stories" [mode]="'indeterminate'" color="accent" [strokeWidth]="7" ngClass="loader">
       </md-progress-spinner>
       <md-list *ngIf="stories">
         <md-list-item *ngFor="let story of stories">
-          <md-icon md-list-icon class="fa fa-bug" aria-hidden></md-icon>
-          <h4 md-line><a [href]="story.href" target="_blank">{{story.key}}:</a> {{story.fields.summary}}</h4>
-          <p md-line>{{story.fields.issuetype.subtask ? 'subtask' : 'story'}}</p>
-          <p md-line>{{story.fields.labels}}</p>
-          <md-checkbox color="primary" [align]="'start'"></md-checkbox>
+          <md-icon md-list-icon>bookmark_border</md-icon>
+          <p md-line ngClass="title"><a [href]="story.href" target="_blank">{{story.key}}:</a> {{story.fields.summary}}
+          </p>
+          <p md-line ngClass="sub-title">{{story.fields.issuetype.subtask ? 'subtask' : 'story'}}</p>
+          <md-checkbox></md-checkbox>
         </md-list-item>
       </md-list>
     </md-card-content>
   </md-card>
+  <!--Repo changes-->
+  <md-card id="repo">
+    <md-card-title>Repo changes</md-card-title>
+    <md-card-content>
+      <md-list *ngIf="repos">
+        <md-list-item *ngFor="let repo of repos">
+          <md-icon md-list-icon class="fa fa-github" aria-hidden></md-icon>
+          <p md-line ngClass="title">{{repo.name}}</p>
+          <p md-line ngClass="sub-title">{{repo.releaseTagPrefix}}-{{repo.name}}</p>
+          <md-checkbox></md-checkbox>
+        </md-list-item>
+      </md-list>
+    </md-card-content>
+  </md-card>
+  <!--Action button-->
+  <div class="floating">
+    <button md-fab>
+      <md-icon aria-hidden>unarchive</md-icon>
+    </button>
+  </div>
 </app-component-viewer>

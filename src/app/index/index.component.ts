@@ -13,6 +13,45 @@ export class IndexComponent implements OnInit {
   runProfiles: string;
   isLoading: boolean;
   stories: Array<any>;
+  repos = [
+    {
+      name: 'mas-audit-queue-ui',
+      releaseTagPrefix: 'jenkins'
+    }, {
+      name: 'mas-audit-link-ui',
+      releaseTagPrefix: 'jenkins'
+    }, {
+      name: 'mas-audit-resolution-ui',
+      releaseTagPrefix: 'jenkins'
+    }, {
+      name: 'mas-audit-ws',
+      releaseTagPrefix: 'jenkins'
+    }, {
+      name: 'mas-audit-batch-ws',
+      releaseTagPrefix: 'jenkins'
+    }, {
+      name: 'mas-audit-queue-ws',
+      releaseTagPrefix: 'jenkins'
+    }, {
+      name: 'mas-audit-export-ws',
+      releaseTagPrefix: 'jenkins'
+    }, {
+      name: 'mas-audit-header-sources-ws',
+      releaseTagPrefix: 'jenkins'
+    }, {
+      name: 'mas-audit-resolution-ws',
+      releaseTagPrefix: 'jenkins'
+    }, {
+      name: 'lnhc-client-id-enumeration',
+      releaseTagPrefix: 'jenkins'
+    }, {
+      name: 'mock-auth-server',
+      releaseTagPrefix: 'jenkins'
+    }, {
+      name: 'mock-roxie-server',
+      releaseTagPrefix: 'jenkins'
+    }
+  ];
 
   constructor(private title: Title, private coreSerivce: CoreService, public sanitizer: DomSanitizer) {
     this.baserUrl = '/cgi-bin/checkprofile.py';
