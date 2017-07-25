@@ -1,6 +1,16 @@
 <app-component-viewer [componentName]="'Generate Release Email'">
   <md-card>
-    <md-card-title>Runprofiles</md-card-title>
+    <md-card-title>
+      <div class="flex">
+        <span class="title">
+          Runprofiles
+        </span>
+        <!--<div style="flex-grow: 1"></div>-->
+        <a md-icon-button (click)="checkoutProfile()" mdTooltip="Refresh" [mdTooltipPosition]="'right'">
+          <md-icon color="primary">refresh</md-icon>
+        </a>
+      </div>
+    </md-card-title>
     <md-card-subtitle>{{baserUrl}}</md-card-subtitle>
     <md-card-content>
       <md-progress-spinner *ngIf="isLoading" [mode]="'indeterminate'" color="accent" [strokeWidth]="5">
@@ -8,12 +18,19 @@
       <div class="profile-details" [innerHTML]="sanitizer.bypassSecurityTrustHtml(runProfiles)" *ngIf="runProfiles">
       </div>
     </md-card-content>
-    <md-card-actions>
-      <button md-raised-button color="primary" (click)="checkoutProfile()">REFRESH</button>
-    </md-card-actions>
   </md-card>
   <md-card>
-    <md-card-title>Jira stories</md-card-title>
+    <md-card-title>
+      <div class="flex">
+        <span class="title">
+          Jira stories
+        </span>
+        <!--<div style="flex-grow: 1"></div>-->
+        <a md-icon-button (click)="fetchJiraStory()" mdTooltip="Refresh" [mdTooltipPosition]="'right'">
+          <md-icon color="primary">refresh</md-icon>
+        </a>
+      </div>
+    </md-card-title>
     <md-card-subtitle>{{sprint}}</md-card-subtitle>
     <md-card-content>
       <md-progress-spinner *ngIf="!stories" [mode]="'indeterminate'" color="accent" [strokeWidth]="5">
@@ -28,8 +45,5 @@
         </md-list-item>
       </md-list>
     </md-card-content>
-    <md-card-actions>
-      <button md-raised-button color="primary" (click)="fetchJiraStory()">REFRESH</button>
-    </md-card-actions>
   </md-card>
 </app-component-viewer>

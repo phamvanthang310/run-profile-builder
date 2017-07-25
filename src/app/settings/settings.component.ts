@@ -20,9 +20,6 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Settings');
-    this.coreService.fetchJira(this.jiraDomain, this.sprint).subscribe(s => {
-      console.log(s);
-    });
   }
 
 }
