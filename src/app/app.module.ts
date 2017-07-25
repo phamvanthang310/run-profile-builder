@@ -11,6 +11,7 @@ import {SettingsComponent} from './settings/settings.component';
 import {FormsModule} from '@angular/forms';
 import {CoreService} from './services/core.service';
 import {HttpModule} from '@angular/http';
+import {ReleaseDialogComponent} from './release-dialog/release-dialog.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {HttpModule} from '@angular/http';
     IndexComponent,
     ComponentViewerComponent,
     ErrorPageComponent,
-    SettingsComponent
+    SettingsComponent,
+    ReleaseDialogComponent
   ],
   imports: [
     HttpModule,
@@ -30,6 +32,9 @@ import {HttpModule} from '@angular/http';
   ],
   providers: [
     CoreService
+  ],
+  entryComponents: [
+    ReleaseDialogComponent
   ],
   bootstrap: [AppComponent]
 })

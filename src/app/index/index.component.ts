@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {DomSanitizer, Title} from '@angular/platform-browser';
 import {CoreService} from '../services/core.service';
+import {MdDialog} from '@angular/material';
+import {ReleaseDialogComponent} from '../release-dialog/release-dialog.component';
 
 @Component({
   selector: 'app-index',
@@ -53,7 +55,8 @@ export class IndexComponent implements OnInit {
     }
   ];
 
-  constructor(private title: Title, private coreSerivce: CoreService, public sanitizer: DomSanitizer) {
+  constructor(private title: Title, private coreSerivce: CoreService, public sanitizer: DomSanitizer,
+              public dialog: MdDialog) {
     this.baserUrl = '/cgi-bin/checkprofile.py';
     this.sprint = 'Dolphin 2017.S7.2';
     this.isLoading = false;
@@ -87,4 +90,10 @@ export class IndexComponent implements OnInit {
     });
   }
 
+  openDialog() {
+    const dialogRef = this.dialog.open(ReleaseDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
 }
