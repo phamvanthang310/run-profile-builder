@@ -3,31 +3,33 @@
     <md-card-title>Runprofiles</md-card-title>
     <md-card-subtitle>{{baserUrl}}</md-card-subtitle>
     <md-card-content>
-      <div class="profile-details">
-        <p>audit-ws 123</p>
-        <p>audit-ws 123</p>
-        <p>audit-ws 123</p>
-        <p>audit-ws 123</p>
-        <p>audit-ws 123</p>
-        <p>audit-ws 123</p>
-        <p>audit-ws 123</p>
+      <md-progress-spinner *ngIf="isLoading" [mode]="'indeterminate'" color="accent" [strokeWidth]="5">
+      </md-progress-spinner>
+      <div class="profile-details" [innerHTML]="sanitizer.bypassSecurityTrustHtml(runProfiles)" *ngIf="runProfiles">
       </div>
     </md-card-content>
     <md-card-actions>
-      <button md-button>REFRESH</button>
+      <button md-raised-button color="primary" (click)="checkoutProfile()">REFRESH</button>
     </md-card-actions>
   </md-card>
   <md-card>
     <md-card-title>Jira stories</md-card-title>
-    <md-card-subtitle>Sprint 7.2</md-card-subtitle>
+    <md-card-subtitle>{{sprint}}</md-card-subtitle>
     <md-card-content>
-      <md-list>
+      <md-progress-spinner *ngIf="!stories" [mode]="'indeterminate'" color="accent" [strokeWidth]="5">
+      </md-progress-spinner>
+      <md-list *ngIf="stories">
         <md-list-item *ngFor="let story of stories">
-          <md-icon md-list-icon>start</md-icon>
-          <h4 md-line><a href="" target="_blank">{{story.code}}:</a> {{story.name}}</h4>
+          <md-icon md-list-icon class="fa fa-bug" aria-hidden></md-icon>
+          <h4 md-line><a [href]="story.href" target="_blank">{{story.key}}:</a> {{story.fields.summary}}</h4>
+          <p md-line>{{story.fields.issuetype.subtask ? 'subtask' : 'story'}}</p>
+          <p md-line>{{story.fields.labels}}</p>
           <md-checkbox color="primary" [align]="'start'"></md-checkbox>
         </md-list-item>
       </md-list>
     </md-card-content>
+    <md-card-actions>
+      <button md-raised-button color="primary" (click)="fetchJiraStory()">REFRESH</button>
+    </md-card-actions>
   </md-card>
 </app-component-viewer>

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Title} from '@angular/platform-browser';
+import {DomSanitizer, Title} from '@angular/platform-browser';
+import {CoreService} from '../services/core.service';
 
 @Component({
   selector: 'app-index',
@@ -8,27 +9,43 @@ import {Title} from '@angular/platform-browser';
 })
 export class IndexComponent implements OnInit {
   baserUrl: string;
-  stories = [
-    {
-      name: 'Ability to navigate back to resolution screen from link repair',
-      code: 'MAS-123',
-    },
-    {
-      name: 'Recipes',
-      code: 'MAS-456',
-    },
-    {
-      name: 'Work',
-      code: 'MAS-789',
-    }
-  ];
+  sprint: string;
+  runProfiles: string;
+  isLoading: boolean;
+  stories: Array<any>;
 
-  constructor(private title: Title) {
-    this.baserUrl = 'ci01.dolphin.lexisnexisrisk.com';
+  constructor(private title: Title, private coreSerivce: CoreService, public sanitizer: DomSanitizer) {
+    this.baserUrl = '/cgi-bin/checkprofile.py';
+    this.sprint = 'Dolphin 2017.S7.2';
+    this.isLoading = false;
   }
 
   ngOnInit() {
     this.title.setTitle('Generate Release');
+    this.checkoutProfile();
+    this.fetchJiraStory();
+  }
+
+  checkoutProfile() {
+    this.runProfiles = null;
+    this.isLoading = true;
+    this.coreSerivce.checkoutProfile(this.baserUrl).subscribe(s => {
+      this.runProfiles = s.split(/\r\n|\r|\n/g).join('</br>');
+    }, error => {
+      console.log(error);
+    }, () => {
+      this.isLoading = false;
+    });
+  }
+
+  fetchJiraStory() {
+    this.coreSerivce.fetchJira('/rest/api/2/search', this.sprint).subscribe(s => {
+      console.log(s);
+      this.stories = s.issues.map(issue => {
+        issue.href = `https://jira.rsi.lexisnexis.com/browse/${issue.key}`;
+        return issue;
+      });
+    });
   }
 
 }

@@ -1,0 +1,12 @@
+{
+  "/cgi-bin/checkprofile.py": {
+    "target": "http://ci01.dolphin.lexisnexisrisk.com/",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/rest/api/2/search": {
+    "target": "https://jira.rsi.lexisnexis.com/",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}

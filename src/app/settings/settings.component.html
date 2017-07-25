@@ -1,3 +1,60 @@
 <app-component-viewer [componentName]="'Settings'">
-  <h1>Setting container</h1>
+  <!--Core settings-->
+  <md-card>
+    <md-card-title>Core Settings</md-card-title>
+    <md-card-subtitle></md-card-subtitle>
+    <md-card-content>
+      <form class="settings" #commonSettings="ngForm" novalidate>
+        <table class="full-width" cellspacing="1">
+          <tr>
+            <td>
+              <md-input-container class="full-width">
+                <input mdInput required placeholder="Checking profile url" #checkProfileUrlInput="ngModel"
+                       name="checkProfileUrlInput" [(ngModel)]="checkProfileUrl">
+                <md-error *ngIf="checkProfileUrlInput.touched && checkProfileUrlInput.invalid">
+                  Checking profile url is <strong>required</strong>
+                </md-error>
+              </md-input-container>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <md-input-container class="full-width">
+                <input mdInput required placeholder="Sprint" #sprintInput="ngModel" [(ngModel)]="sprint"
+                       name="sprintInput">
+                <md-error *ngIf="sprintInput.touched && sprintInput.invalid">
+                  Sprint is <strong>required</strong>
+                </md-error>
+              </md-input-container>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <md-input-container class="full-width">
+                <input mdInput required placeholder="Jira domain" #jiraDomainInput="ngModel" [(ngModel)]="jiraDomain"
+                       name="jiraDomainInput">
+                <md-error *ngIf="jiraDomainInput.touched && jiraDomainInput.invalid">
+                  Jira domain is <strong>required</strong>
+                </md-error>
+              </md-input-container>
+            </td>
+          </tr>
+          <button md-raised-button color="primary" [disabled]="commonSettings.form.invalid || !commonSettings.dirty">
+            APPLY
+          </button>
+        </table>
+      </form>
+    </md-card-content>
+  </md-card>
+  <!--Custom settings-->
+  <md-card>
+    <md-card-title>Custom Settings</md-card-title>
+    <md-card-subtitle></md-card-subtitle>
+    <md-card-content>
+      <md-tab-group>
+        <md-tab label="Dolphin">Content 1</md-tab>
+        <md-tab label="Honey Badger">Content 2</md-tab>
+      </md-tab-group>
+    </md-card-content>
+  </md-card>
 </app-component-viewer>
