@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {DomSanitizer, Title} from '@angular/platform-browser';
 import {CoreService} from '../services/core.service';
-import {MdDialog} from '@angular/material';
+import {MdDialog, MdDialogConfig} from '@angular/material';
 import {ReleaseDialogComponent} from '../release-dialog/release-dialog.component';
+import {ReleaseBuilderService} from '../services/release-builder.service';
 
 @Component({
   selector: 'app-index',
@@ -15,48 +16,61 @@ export class IndexComponent implements OnInit {
   runProfiles: string;
   isLoading: boolean;
   stories: Array<any>;
+  report: string;
   repos = [
     {
-      name: 'mas-audit-queue-ui',
-      releaseTagPrefix: 'jenkins'
+      name: 'master-audit-queue-ui',
+      releaseTagPrefix: 'jenkins',
+      pulls: []
     }, {
-      name: 'mas-audit-link-ui',
-      releaseTagPrefix: 'jenkins'
+      name: 'master-audit-link-ui',
+      releaseTagPrefix: 'jenkins',
+      pulls: []
     }, {
-      name: 'mas-audit-resolution-ui',
-      releaseTagPrefix: 'jenkins'
+      name: 'master-audit-resolution-ui',
+      releaseTagPrefix: 'jenkins',
+      pulls: []
     }, {
-      name: 'mas-audit-ws',
-      releaseTagPrefix: 'jenkins'
+      name: 'master-audit-ws',
+      releaseTagPrefix: 'jenkins',
+      pulls: []
     }, {
-      name: 'mas-audit-batch-ws',
-      releaseTagPrefix: 'jenkins'
+      name: 'master-audit-batch-ws',
+      releaseTagPrefix: 'jenkins',
+      pulls: []
     }, {
-      name: 'mas-audit-queue-ws',
-      releaseTagPrefix: 'jenkins'
+      name: 'master-audit-queue-ws',
+      releaseTagPrefix: 'jenkins',
+      pulls: []
     }, {
-      name: 'mas-audit-export-ws',
-      releaseTagPrefix: 'jenkins'
+      name: 'master-audit-export-ws',
+      releaseTagPrefix: 'jenkins',
+      pulls: []
     }, {
-      name: 'mas-audit-header-sources-ws',
-      releaseTagPrefix: 'jenkins'
+      name: 'master-audit-header-sources-ws',
+      releaseTagPrefix: 'jenkins',
+      pulls: []
     }, {
-      name: 'mas-audit-resolution-ws',
-      releaseTagPrefix: 'jenkins'
+      name: 'master-audit-resolution-ws',
+      releaseTagPrefix: 'jenkins',
+      pulls: []
     }, {
-      name: 'lnhc-client-id-enumeration',
-      releaseTagPrefix: 'jenkins'
+      name: 'lnhc-client-id-enumeration-ws',
+      releaseTagPrefix: 'jenkins',
+      pulls: []
     }, {
       name: 'mock-auth-server',
-      releaseTagPrefix: 'jenkins'
+      releaseTagPrefix: 'jenkins',
+      pulls: []
     }, {
       name: 'mock-roxie-server',
-      releaseTagPrefix: 'jenkins'
+      releaseTagPrefix: 'jenkins',
+      pulls: []
     }
   ];
 
   constructor(private title: Title, private coreSerivce: CoreService, public sanitizer: DomSanitizer,
-              public dialog: MdDialog) {
+              public dialog: MdDialog, private releaseService: ReleaseBuilderService) {
     this.baserUrl = '/cgi-bin/checkprofile.py';
     this.sprint = 'Dolphin 2017.S7.2';
     this.isLoading = false;
@@ -66,6 +80,7 @@ export class IndexComponent implements OnInit {
     this.title.setTitle('Generate Release');
     this.checkoutProfile();
     this.fetchJiraStory();
+    // this.fetchGitPrs();
   }
 
   checkoutProfile() {
@@ -73,6 +88,7 @@ export class IndexComponent implements OnInit {
     this.isLoading = true;
     this.coreSerivce.checkoutProfile(this.baserUrl).subscribe(s => {
       this.runProfiles = s.split(/\r\n|\r|\n/g).join('</br>');
+      console.log(this.runProfiles);
     }, error => {
       console.log(error);
     }, () => {
@@ -82,7 +98,6 @@ export class IndexComponent implements OnInit {
 
   fetchJiraStory() {
     this.coreSerivce.fetchJira('/rest/api/2/search', this.sprint).subscribe(s => {
-      console.log(s);
       this.stories = s.issues.map(issue => {
         issue.href = `https://jira.rsi.lexisnexis.com/browse/${issue.key}`;
         return issue;
@@ -91,9 +106,14 @@ export class IndexComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(ReleaseDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
+    const config: MdDialogConfig = new MdDialogConfig();
+    config.width = '1000px';
+    const dialogRef = this.dialog.open(ReleaseDialogComponent, config);
+    dialogRef.componentInstance.data = {
+      sprint: this.sprint,
+      runProfiles: this.runProfiles,
+      stories: this.stories,
+      repos: this.repos
+    };
   }
 }

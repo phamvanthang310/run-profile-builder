@@ -12,6 +12,7 @@ import {FormsModule} from '@angular/forms';
 import {CoreService} from './services/core.service';
 import {HttpModule} from '@angular/http';
 import {ReleaseDialogComponent} from './release-dialog/release-dialog.component';
+import {ReleaseBuilderService} from './services/release-builder.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {ReleaseDialogComponent} from './release-dialog/release-dialog.component'
     MaterialModule
   ],
   providers: [
-    CoreService
+    CoreService,
+    ReleaseBuilderService
   ],
   entryComponents: [
     ReleaseDialogComponent

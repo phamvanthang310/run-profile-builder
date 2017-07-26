@@ -8,5 +8,10 @@
     "target": "https://jira.rsi.lexisnexis.com/",
     "secure": false,
     "logLevel": "debug"
+  },
+  "/api/v3/repos/*": {
+    "target": "http://plgithub01.hmsonline.com/",
+    "secure": false,
+    "logLevel": "debug"
   }
 }

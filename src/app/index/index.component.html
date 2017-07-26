@@ -42,8 +42,8 @@
           <md-icon md-list-icon>bookmark_border</md-icon>
           <p md-line ngClass="title"><a [href]="story.href" target="_blank">{{story.key}}:</a> {{story.fields.summary}}
           </p>
-          <p md-line ngClass="sub-title">{{story.fields.issuetype.subtask ? 'subtask' : 'story'}}</p>
-          <md-checkbox></md-checkbox>
+          <p md-line ngClass="sub-title">{{story.fields.issuetype.subtask ? 'Sub Task' : 'Story'}}</p>
+          <md-checkbox [(ngModel)]="story.checked"></md-checkbox>
         </md-list-item>
       </md-list>
     </md-card-content>
@@ -57,7 +57,7 @@
           <md-icon md-list-icon class="fa fa-github" aria-hidden></md-icon>
           <p md-line ngClass="title">{{repo.name}}</p>
           <p md-line ngClass="sub-title">{{repo.releaseTagPrefix}}-{{repo.name}}</p>
-          <md-checkbox></md-checkbox>
+          <md-checkbox [(ngModel)]="repo.checked"></md-checkbox>
         </md-list-item>
       </md-list>
     </md-card-content>
