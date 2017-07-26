@@ -3,7 +3,7 @@ import {DomSanitizer, Title} from '@angular/platform-browser';
 import {CoreService} from '../services/core.service';
 import {MdDialog, MdDialogConfig} from '@angular/material';
 import {ReleaseDialogComponent} from '../release-dialog/release-dialog.component';
-import {ReleaseBuilderService} from '../services/release-builder.service';
+import {ConfigService} from '../services/config.service';
 
 @Component({
   selector: 'app-index',
@@ -11,76 +11,26 @@ import {ReleaseBuilderService} from '../services/release-builder.service';
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent implements OnInit {
+  readonly TITLE = 'Generate Release Email';
   baserUrl: string;
   sprint: string;
   runProfiles: string;
   isLoading: boolean;
   stories: Array<any>;
-  report: string;
-  repos = [
-    {
-      name: 'master-audit-queue-ui',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'master-audit-link-ui',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'master-audit-resolution-ui',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'master-audit-ws',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'master-audit-batch-ws',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'master-audit-queue-ws',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'master-audit-export-ws',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'master-audit-header-sources-ws',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'master-audit-resolution-ws',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'lnhc-client-id-enumeration-ws',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'mock-auth-server',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'mock-roxie-server',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }
-  ];
+  repos: Array<any>;
 
   constructor(private title: Title, private coreSerivce: CoreService, public sanitizer: DomSanitizer,
-              public dialog: MdDialog, private releaseService: ReleaseBuilderService) {
+              public dialog: MdDialog, private config: ConfigService) {
     this.baserUrl = '/cgi-bin/checkprofile.py';
     this.sprint = 'Dolphin 2017.S7.2';
     this.isLoading = false;
+    this.repos = config.getRepos();
   }
 
   ngOnInit() {
-    this.title.setTitle('Generate Release');
+    this.title.setTitle(this.TITLE);
     this.checkoutProfile();
     this.fetchJiraStory();
-    // this.fetchGitPrs();
   }
 
   checkoutProfile() {

@@ -13,6 +13,8 @@ import {CoreService} from './services/core.service';
 import {HttpModule} from '@angular/http';
 import {ReleaseDialogComponent} from './release-dialog/release-dialog.component';
 import {ReleaseBuilderService} from './services/release-builder.service';
+import {PullRequestComponent} from './pull-request/pull-request.component';
+import {ConfigService} from './services/config.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import {ReleaseBuilderService} from './services/release-builder.service';
     ComponentViewerComponent,
     ErrorPageComponent,
     SettingsComponent,
-    ReleaseDialogComponent
+    ReleaseDialogComponent,
+    PullRequestComponent
   ],
   imports: [
     HttpModule,
@@ -33,7 +36,8 @@ import {ReleaseBuilderService} from './services/release-builder.service';
   ],
   providers: [
     CoreService,
-    ReleaseBuilderService
+    ReleaseBuilderService,
+    ConfigService
   ],
   entryComponents: [
     ReleaseDialogComponent

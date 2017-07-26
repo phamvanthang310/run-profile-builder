@@ -8,6 +8,7 @@ import {CoreService} from '../services/core.service';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
+  readonly TITLE = 'Settings';
   checkProfileUrl: string;
   sprint: string;
   jiraDomain: string;
@@ -19,7 +20,7 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title.setTitle('Settings');
+    this.title.setTitle(this.TITLE);
   }
 
 }
