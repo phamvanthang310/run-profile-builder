@@ -1,5 +1,6 @@
 target/
 src/webui/node_module/
+src/main/resources/static
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
