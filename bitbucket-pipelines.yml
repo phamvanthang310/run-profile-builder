@@ -1,10 +1,9 @@
-image: node:6.9.4
+image: thangpham310/java8-mvn-nodejs-npm:latest
 
 pipelines:
   default:
     - step:
         caches:
-          - node
+          - maven
         script:
-          - npm install
-          - npm run build
+          - mvn clean install

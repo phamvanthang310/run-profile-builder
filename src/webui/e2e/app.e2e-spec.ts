@@ -1,4 +1,4 @@
-import { RunprofileBuilderPage } from './app.po';
+import {RunprofileBuilderPage} from './app.po';
 
 describe('runprofile-builder App', () => {
   let page: RunprofileBuilderPage;
