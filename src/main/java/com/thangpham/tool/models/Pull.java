@@ -16,24 +16,34 @@ public class Pull {
     private User user;
     private Link _links;
     private Head head;
-}
 
-class User {
-    public String login;
-}
+    @Getter
+    @Setter
+    public static class User {
+        private String login;
+    }
 
-class Link {
-    public Html html;
-}
+    @Getter
+    @Setter
+    public static class Link {
+        private Html html;
+    }
 
-class Html {
-    public String href;
-}
+    @Getter
+    @Setter
+    public static class Html {
+        private String href;
+    }
 
-class Head {
-    public Repo repo;
-}
+    @Getter
+    @Setter
+    public static class Head {
+        private Repo repo;
+    }
 
-class Repo {
-    public String name;
+    @Getter
+    @Setter
+    public static class Repo {
+        private String name;
+    }
 }

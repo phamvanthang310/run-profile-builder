@@ -1,25 +1,26 @@
 package com.thangpham.tool.service;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.thangpham.tool.configs.JiraProperties;
+import com.thangpham.tool.models.Jira;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.thangpham.tool.configs.JiraProperties;
-import com.thangpham.tool.models.Jira;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by tpham.
  */
 
 @Service
-public class JiraService extends AbstractGateway {
+@ConditionalOnProperty(name = "jira.mock", havingValue = "false", matchIfMissing = true)
+public class JiraService extends AbstractGateway implements IJiraService {
     private JiraProperties jiraProperties;
 
     @Autowired
@@ -28,6 +29,7 @@ public class JiraService extends AbstractGateway {
         this.jiraProperties = jiraProperties;
     }
 
+    @Override
     public Jira fetchJiraStory(String sprint) {
         String url = jiraProperties.getDomain() + jiraProperties.getFetchStoryUrl();
         Map<String, String> requestParams = new HashMap<>();

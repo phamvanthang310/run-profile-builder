@@ -1,10 +1,10 @@
 package com.thangpham.tool.models;
 
-import java.util.List;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 /**
  * Created by tpham.
@@ -15,20 +15,25 @@ import lombok.Setter;
 public class Jira {
     private int total;
     private List<Issue> issues;
-}
 
-class Issue {
-    public String key;
-    public Fields fields;
+    @Getter
+    @Setter
+    public static class Issue {
+        private String key;
+        private Fields fields;
+    }
 
-}
+    @Getter
+    @Setter
+    public static class Fields {
+        private Issuetype issuetype;
+        private String summary;
+    }
 
-class Fields {
-    public Issuetype issuetype;
-    public String summary;
-}
-
-class Issuetype {
-    public String name;
-    public boolean subtask;
+    @Getter
+    @Setter
+    public static class Issuetype {
+        private String name;
+        private boolean subtask;
+    }
 }

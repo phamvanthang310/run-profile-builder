@@ -1,10 +1,9 @@
 package com.thangpham.tool.configs;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Created by tpham.
@@ -18,4 +17,5 @@ public class JiraProperties {
     private String domain;
     private String fetchStoryUrl;
     private String token;
+    private String stories;
 }

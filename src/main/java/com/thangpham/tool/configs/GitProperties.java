@@ -1,12 +1,11 @@
 package com.thangpham.tool.configs;
 
-import java.util.List;
-
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.util.List;
 
 /**
  * Created by tpham.
@@ -20,4 +19,5 @@ public class GitProperties {
     private String fetchPullRequestUrl;
     private String token;
     private List<String> repos;
+    private String pullRequests;
 }

@@ -1,13 +1,12 @@
 package com.thangpham.tool.rest;
 
+import com.thangpham.tool.models.Jira;
+import com.thangpham.tool.service.IJiraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.thangpham.tool.models.Jira;
-import com.thangpham.tool.service.JiraService;
 
 /**
  * Created by tpham.
@@ -15,10 +14,10 @@ import com.thangpham.tool.service.JiraService;
 @RestController
 @RequestMapping(value = "/api/jira")
 public class JiraRestController {
-    private JiraService jiraService;
+    private IJiraService jiraService;
 
     @Autowired
-    public JiraRestController(JiraService jiraService) {
+    public JiraRestController(IJiraService jiraService) {
         this.jiraService = jiraService;
     }
 

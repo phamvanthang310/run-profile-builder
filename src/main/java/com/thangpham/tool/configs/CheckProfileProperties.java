@@ -1,10 +1,9 @@
 package com.thangpham.tool.configs;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
-
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by tpham.
@@ -16,4 +15,5 @@ import lombok.Setter;
 public class CheckProfileProperties {
     private String domain;
     private String fetchUrl;
+    private String profiles;
 }

@@ -1,15 +1,14 @@
 package com.thangpham.tool.rest;
 
-import java.util.List;
-
+import com.thangpham.tool.models.Pull;
+import com.thangpham.tool.service.IGitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.thangpham.tool.models.Pull;
-import com.thangpham.tool.service.GitService;
+import java.util.List;
 
 /**
  * Created by tpham.
@@ -17,10 +16,10 @@ import com.thangpham.tool.service.GitService;
 @RestController
 @RequestMapping("/api/git")
 public class GitRestController {
-    private GitService gitService;
+    private IGitService gitService;
 
     @Autowired
-    public GitRestController(GitService gitService) {
+    public GitRestController(IGitService gitService) {
         this.gitService = gitService;
     }
 
