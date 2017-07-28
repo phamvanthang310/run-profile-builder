@@ -5,5 +5,10 @@ pipelines:
     - step:
         caches:
           - maven
+          - front-end
         script:
           - mvn clean install
+
+definitions:
+  caches:
+    front-end: /opt/atlassian/pipelines/agent/build/src/webui

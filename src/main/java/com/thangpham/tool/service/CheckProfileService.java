@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @Service
 @ConditionalOnProperty(name = "checkprofile.mock", havingValue = "false", matchIfMissing = true)
-public class CheckProfileService extends AbstractGateway {
+public class CheckProfileService extends AbstractGateway implements ICheckProfileService {
     private CheckProfileProperties checkProfileProperties;
 
     protected CheckProfileService(RestTemplate restTemplate, CheckProfileProperties checkProfileProperties) {
@@ -18,6 +18,7 @@ public class CheckProfileService extends AbstractGateway {
         this.checkProfileProperties = checkProfileProperties;
     }
 
+    @Override
     public String checkoutProfile() {
         return restTemplate.getForObject(checkProfileProperties.getDomain() + checkProfileProperties.getFetchUrl(), String.class);
     }
