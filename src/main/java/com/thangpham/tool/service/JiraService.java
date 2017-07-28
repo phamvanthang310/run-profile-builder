@@ -19,20 +19,19 @@ import com.thangpham.tool.models.Jira;
  */
 
 @Service
-public class JiraService {
-    private RestTemplate restTemplate;
+public class JiraService extends AbstractGateway {
     private JiraProperties jiraProperties;
 
     @Autowired
     public JiraService(RestTemplate restTemplate, JiraProperties jiraProperties) {
-        this.restTemplate = restTemplate;
+        super(restTemplate);
         this.jiraProperties = jiraProperties;
     }
 
     public Jira fetchJiraStory(String sprint) {
         String url = jiraProperties.getDomain() + jiraProperties.getFetchStoryUrl();
         Map<String, String> requestParams = new HashMap<>();
-        requestParams.put("jql", String.format(jiraProperties.getJqlQuery(), sprint));
+        requestParams.put("sprint", sprint);
 
         HttpHeaders headers = new HttpHeaders();
         headers.put("Authorization", Collections.singletonList("Basic " + jiraProperties.getToken()));

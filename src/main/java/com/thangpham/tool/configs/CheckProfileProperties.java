@@ -1,7 +1,5 @@
 package com.thangpham.tool.configs;
 
-import java.util.List;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -12,12 +10,10 @@ import lombok.Setter;
  * Created by tpham.
  */
 @Component
-@ConfigurationProperties(prefix = "git")
-@Setter
+@ConfigurationProperties(prefix = "checkprofile")
 @Getter
-public class GitProperties {
+@Setter
+public class CheckProfileProperties {
     private String domain;
-    private String fetchPullRequestUrl;
-    private String token;
-    private List<String> repos;
+    private String fetchUrl;
 }

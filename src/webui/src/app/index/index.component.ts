@@ -36,7 +36,7 @@ export class IndexComponent implements OnInit {
   checkoutProfile() {
     this.runProfiles = null;
     this.isLoading = true;
-    this.coreSerivce.checkoutProfile(this.baserUrl).subscribe(s => {
+    this.coreSerivce.checkoutProfile().subscribe(s => {
       this.runProfiles = s.split(/\r\n|\r|\n/g).join('</br>');
       console.log(this.runProfiles);
     }, error => {
@@ -47,7 +47,7 @@ export class IndexComponent implements OnInit {
   }
 
   fetchJiraStory() {
-    this.coreSerivce.fetchJira('/rest/api/2/search', this.sprint).subscribe(s => {
+    this.coreSerivce.fetchJira(this.sprint).subscribe(s => {
       this.stories = s.issues.map(issue => {
         issue.href = `https://jira.rsi.lexisnexis.com/browse/${issue.key}`;
         return issue;

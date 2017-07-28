@@ -1,7 +1,7 @@
 package com.thangpham.tool.rest;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +13,7 @@ import com.thangpham.tool.service.JiraService;
  * Created by tpham.
  */
 @RestController
-@RequestMapping(value = "/jira")
+@RequestMapping(value = "/api/jira")
 public class JiraRestController {
     private JiraService jiraService;
 
@@ -22,8 +22,8 @@ public class JiraRestController {
         this.jiraService = jiraService;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public Jira getJiras(@NotBlank String sprint) {
+    @RequestMapping(value = "/{sprint}", method = RequestMethod.GET)
+    public Jira getJiras(@PathVariable String sprint) {
         return jiraService.fetchJiraStory(sprint);
     }
 }

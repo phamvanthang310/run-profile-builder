@@ -17,6 +17,5 @@ import lombok.Setter;
 public class JiraProperties {
     private String domain;
     private String fetchStoryUrl;
-    private String jqlQuery;
     private String token;
 }

@@ -24,7 +24,6 @@ export class PullRequestComponent implements OnInit {
   }
 
   fetchPullRequest(repoName: string) {
-    this.pullsObser = this.coreSerivce.fetchGitPRs('', repoName);
+    this.pullsObser = this.coreSerivce.fetchGitPRs(repoName);
   }
-
 }

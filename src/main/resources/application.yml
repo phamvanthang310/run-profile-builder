@@ -2,15 +2,39 @@ server:
   port: 9000
 
 jira:
-  domain: https://jira.rsi.lexisnexis.com
-  fetch-story-url: /rest/api/2/search
-  jql-query: project = MAS AND issuetype in (Bug, Story, "Bug Sub-Task") AND Sprint = %s
+  domain: https://plosdb01.hmsonline.com
+  fetch-story-url: /rest/api/2/search?jql=project = MAS AND issuetype in (Bug, Story, "Bug Sub-Task") AND Sprint = "{sprint}"
   token: UGhhbVRoMDFAcmlzazpIQHJkd29yaw==
 
 git:
   domain: http://plgithub01.hmsonline.com
   fetch-pull-request-url: /api/v3/repos/kms-lnhc/%s/pulls
   token: d48ee5883255d4bcd6668424237c53cd672708dc
+  repos:
+    - master-audit-queue-ui
+    - master-audit-queue-ui-config
+    - master-audit-queue-ws
+    - master-audit-queue-ws-config
+    - master-audit-link-ui
+    - master-audit-link-ui-config
+    - master-audit-resolution-ui
+    - master-audit-resolution-ui-config
+    - master-audit-resolution-ws
+    - master-audit-resolution-ws-config
+    - master-audit-ws
+    - master-audit-ws-config
+    - master-audit-batch-ws
+    - master-audit-batch-ws-config
+    - master-audit-export-ws
+    - master-audit-export-ws-config
+    - master-audit-header-sources-ws
+    - master-audit-header-sources-ws-config
+    - lnhc-client-id-enumeration-ws
+    - lnhc-client-id-enumeration-ws-config
+    - mock-authorization-server
+    - mock-authorization-server-config
+    - mock-roxie-server
+    - mock-roxie-server-config
 
 checkprofile:
   domain: http://ci01.dolphin.lexisnexisrisk.com

@@ -15,22 +15,20 @@ import lombok.Setter;
 public class Jira {
     private int total;
     private List<Issue> issues;
-
-    private class Issue {
-        private String key;
-        private Fields fields;
-
-    }
-
-    private class Fields {
-        private IssueType issueType;
-        private String summary;
-    }
-
-    private class IssueType {
-        private String name;
-        private boolean subtask;
-    }
 }
 
+class Issue {
+    public String key;
+    public Fields fields;
 
+}
+
+class Fields {
+    public Issuetype issuetype;
+    public String summary;
+}
+
+class Issuetype {
+    public String name;
+    public boolean subtask;
+}
