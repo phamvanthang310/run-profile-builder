@@ -14,7 +14,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v2-dependency-cache-{{ checksum "package.json" }}
+            - v2-dependency-cache-{{ checksum "./src/webui/package.json" }}
       - run:
           name: npm install
           command: cd src/webui && npm install
@@ -22,7 +22,7 @@ jobs:
       - save_cache:
           paths:
             - ./src/webui/node_modules
-          key: v2-dependency-cache-{{ checksum "package.json" }}
+          key: v2-dependency-cache-{{ checksum "./src/webui/package.json" }}
 
   build-jar:
     docker:
