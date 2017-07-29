@@ -1,0 +1,58 @@
+# Java Maven CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-java/ for more details
+#
+version: 2
+jobs:
+  build-front-end:
+    docker:
+      - image: thangpham310/java8-mvn-nodejs-npm:latest
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v2-dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: npm install
+          command: cd src/webui && npm install
+
+      - save_cache:
+          paths:
+            - ./src/webui/node_modules
+          key: v2-dependency-cache-{{ checksum "package.json" }}
+
+  build-jar:
+    docker:
+      - image: thangpham310/java8-mvn-nodejs-npm:latest
+
+    working_directory: ~/repo
+
+    environment:
+      # Customize the JVM maximum heap limit
+      MAVEN_OPTS: -Xmx3200m
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+      - run: mvn dependency:go-offline
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+      - run:
+          name: build jar
+          command: mvn clean install
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build-front-end
+      - build-jar:
+          requires:
+            - build-front-end
