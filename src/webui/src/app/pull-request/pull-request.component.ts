@@ -1,18 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CoreService} from '../services/core.service';
 import {Title} from '@angular/platform-browser';
 import {ConfigService} from '../services/config.service';
-import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
+import _ from 'lodash';
 
 @Component({
   selector: 'app-pull-request',
   templateUrl: './pull-request.component.html',
   styleUrls: ['./pull-request.component.scss']
 })
-export class PullRequestComponent implements OnInit {
+export class PullRequestComponent implements OnInit, OnDestroy {
   readonly TITLE = 'Pull requests control';
+  readonly ALL_REPO = 'all';
   readonly repos: Array<any>;
-  pullsObser: Observable<Array<any>>;
+  pullsGroupByRepo: Array<any>;
+  subscription: Subscription;
 
   constructor(private title: Title, private coreSerivce: CoreService, private config: ConfigService) {
     this.repos = this.config.getRepos();
@@ -20,10 +23,39 @@ export class PullRequestComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle(this.TITLE);
-    this.fetchPullRequest('master-audit-resolution-ui');
+    this.fetchPull();
   }
 
-  fetchPullRequest(repoName: string) {
-    this.pullsObser = this.coreSerivce.fetchGitPRs(repoName);
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  fetchPull(repoName = this.ALL_REPO): void {
+    let observable = null;
+    if (_.eq(this.ALL_REPO, repoName)) {
+      observable = this.coreSerivce.fetchAllGitPull();
+    } else {
+      observable = this.coreSerivce.fetchGitPull(repoName);
+    }
+    this.subscription = observable.subscribe(pulls => this.processPulls(pulls));
+  }
+
+  changeRepo(event) {
+    // this.fetchPull(event.data);
+    console.log(event.value);
+    this.fetchPull(event.value);
+  }
+
+  private processPulls(pulls: Array<any>): void {
+    console.log(pulls);
+    this.pullsGroupByRepo = [];
+    const groupedPulls = _.groupBy(pulls, _.iteratee('head.repo.name'));
+    _.forEach(groupedPulls, (value, key) => {
+      this.pullsGroupByRepo.push({
+        name: key,
+        pulls: value
+      });
+    });
+    console.log(this.pullsGroupByRepo);
   }
 }

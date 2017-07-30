@@ -9,6 +9,7 @@ export class CoreService {
   readonly RUN_PROFILE_URL = '/api/profile';
   readonly JIRA_URL = '/api/jira/${sprint}';
   readonly GIT_URL = '/api/git/${repoName}';
+  readonly ALL_GIT_PULL_URL = '/api/git';
 
   constructor(private http: Http) {
   }
@@ -21,8 +22,12 @@ export class CoreService {
     return this.http.get(this.buildUrl(this.JIRA_URL, {sprint: sprint})).map((s: Response) => s.json());
   }
 
-  fetchGitPRs(repoName: string) {
+  fetchGitPull(repoName: string) {
     return this.http.get(this.buildUrl(this.GIT_URL, {repoName: repoName})).map((s: Response) => s.json());
+  }
+
+  fetchAllGitPull() {
+    return this.http.get(this.ALL_GIT_PULL_URL).map((s: Response) => s.json());
   }
 
   private buildUrl(url: string, params: any): string {
