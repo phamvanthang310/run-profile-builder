@@ -14,7 +14,13 @@
                              ngClass="loader">
         </md-progress-spinner>
       </ng-template>
+      <ng-template #empty>
+        <div class="empty">
+          <h1>No Available Pull Request</h1>
+        </div>
+      </ng-template>
       <md-list *ngIf="pullsGroupByRepo; else spinner">
+        <div *ngIf="pullsGroupByRepo.length > 0; else empty"></div>
         <div *ngFor="let repo of pullsGroupByRepo; last as isLast">
           <h3 md-subheader>{{repo.name}}</h3>
           <md-list-item *ngFor="let pull of repo.pulls">

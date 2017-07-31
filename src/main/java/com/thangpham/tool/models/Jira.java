@@ -1,10 +1,11 @@
 package com.thangpham.tool.models;
 
+import java.io.Serializable;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 /**
  * Created by tpham.
@@ -12,7 +13,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Jira {
+public class Jira implements Serializable {
+    private static final long serialVersionUID = -3664377498916156339L;
     private int total;
     private List<Issue> issues;
 

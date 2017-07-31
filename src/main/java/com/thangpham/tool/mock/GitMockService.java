@@ -1,10 +1,8 @@
 package com.thangpham.tool.mock;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.thangpham.tool.configs.GitProperties;
-import com.thangpham.tool.models.Pull;
-import com.thangpham.tool.service.IGitService;
-import com.thangpham.tool.util.JsonObjectMapper;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.apache.commons.collections.ListUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.thangpham.tool.configs.GitProperties;
+import com.thangpham.tool.models.Pull;
+import com.thangpham.tool.models.Repo;
+import com.thangpham.tool.service.IGitService;
+import com.thangpham.tool.util.JsonObjectMapper;
 
 @Service
 @ConditionalOnProperty(name = "git.mock", havingValue = "true")
@@ -46,7 +48,12 @@ public class GitMockService implements IGitService {
     }
 
     @Override
-    public List<String> getAllRepo() {
-        return gitProperties.getRepos();
+    public List<Repo> getAllRepo() {
+        return gitProperties.getRepos().stream().map(repoName -> {
+            Repo repo = new Repo();
+            repo.setName(repoName);
+            repo.setJenkinBuildName(JENKIN_BUILD_PREFIX + repoName);
+            return repo;
+        }).collect(Collectors.toList());
     }
 }

@@ -22,7 +22,7 @@ export class IndexComponent implements OnInit {
   constructor(private title: Title, private coreSerivce: CoreService, public sanitizer: DomSanitizer,
               public dialog: MdDialog, private config: ConfigService) {
     this.baserUrl = '/cgi-bin/checkprofile.py';
-    this.sprint = 'Dolphin 2017.S7.2';
+    this.sprint = 'Dolphin 2017.S8.1';
     this.isLoading = false;
     this.repos = config.getRepos();
   }

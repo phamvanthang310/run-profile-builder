@@ -1,14 +1,16 @@
 package com.thangpham.tool.rest;
 
-import com.thangpham.tool.models.Pull;
-import com.thangpham.tool.service.IGitService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.thangpham.tool.models.Pull;
+import com.thangpham.tool.models.Repo;
+import com.thangpham.tool.service.IGitService;
 
 /**
  * Created by tpham.
@@ -34,7 +36,7 @@ public class GitRestController {
     }
 
     @RequestMapping(value = "/repos", method = RequestMethod.GET)
-    public List<String> getAllRepo() {
+    public List<Repo> getAllRepo() {
         return gitService.getAllRepo();
     }
 }

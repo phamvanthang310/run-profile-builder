@@ -1,7 +1,9 @@
 package com.thangpham.tool.service;
 
-import com.thangpham.tool.configs.GitProperties;
-import com.thangpham.tool.models.Pull;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.ListUtils;
 import org.slf4j.Logger;
@@ -15,9 +17,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.thangpham.tool.configs.GitProperties;
+import com.thangpham.tool.models.Pull;
+import com.thangpham.tool.models.Repo;
 
 /**
  * Created by tpham.
@@ -51,11 +53,16 @@ public class GitService extends AbstractGateway implements IGitService {
         if (CollectionUtils.isEmpty(gitProperties.getRepos())) {
             return ListUtils.EMPTY_LIST;
         }
-        return getAllRepo().stream().flatMap(repo -> getPullRequest(repo).stream()).collect(Collectors.toList());
+        return getAllRepo().stream().flatMap(repo -> getPullRequest(repo.getName()).stream()).collect(Collectors.toList());
     }
 
     @Override
-    public List<String> getAllRepo() {
-        return gitProperties.getRepos();
+    public List<Repo> getAllRepo() {
+        return gitProperties.getRepos().stream().map(repoName -> {
+            Repo repo = new Repo();
+            repo.setName(repoName);
+            repo.setJenkinBuildName(JENKIN_BUILD_PREFIX + repoName);
+            return repo;
+        }).collect(Collectors.toList());
     }
 }

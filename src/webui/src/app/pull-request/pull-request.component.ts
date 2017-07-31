@@ -41,13 +41,11 @@ export class PullRequestComponent implements OnInit, OnDestroy {
   }
 
   changeRepo(event) {
-    // this.fetchPull(event.data);
-    console.log(event.value);
+    this.pullsGroupByRepo = null;
     this.fetchPull(event.value);
   }
 
   private processPulls(pulls: Array<any>): void {
-    console.log(pulls);
     this.pullsGroupByRepo = [];
     const groupedPulls = _.groupBy(pulls, _.iteratee('head.repo.name'));
     _.forEach(groupedPulls, (value, key) => {

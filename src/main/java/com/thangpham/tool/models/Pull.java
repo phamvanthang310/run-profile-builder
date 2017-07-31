@@ -1,5 +1,7 @@
 package com.thangpham.tool.models;
 
+import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +12,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Pull {
+public class Pull implements Serializable {
+    private static final long serialVersionUID = -3406156803827667700L;
     private int id;
     private String title;
     private User user;
