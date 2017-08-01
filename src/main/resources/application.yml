@@ -35,6 +35,11 @@ git:
     - mock-authorization-server-config
     - mock-roxie-server
     - mock-roxie-server-config
+    # PDV WS
+    - provider-search-ws
+    - provider-search-ws-config
+    - organization-search-ws
+    - organization-search-ws-config
 
 checkprofile:
   domain: http://ci01.dolphin.lexisnexisrisk.com

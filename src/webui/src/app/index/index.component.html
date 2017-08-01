@@ -56,7 +56,7 @@
         <md-list-item *ngFor="let repo of repos">
           <md-icon md-list-icon class="fa fa-github" aria-hidden></md-icon>
           <p md-line ngClass="title">{{repo.name}}</p>
-          <p md-line ngClass="sub-title">{{repo.releaseTagPrefix}}-{{repo.name}}</p>
+          <p md-line ngClass="sub-title">{{repo.jenkinBuildName}}</p>
           <md-checkbox [(ngModel)]="repo.checked"></md-checkbox>
         </md-list-item>
       </md-list>

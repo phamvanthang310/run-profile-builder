@@ -24,13 +24,13 @@ export class IndexComponent implements OnInit {
     this.baserUrl = '/cgi-bin/checkprofile.py';
     this.sprint = 'Dolphin 2017.S8.1';
     this.isLoading = false;
-    this.repos = config.getRepos();
   }
 
   ngOnInit() {
     this.title.setTitle(this.TITLE);
     this.checkoutProfile();
     this.fetchJiraStory();
+    this.fetchAllGitRepos();
   }
 
   checkoutProfile() {
@@ -53,6 +53,10 @@ export class IndexComponent implements OnInit {
         return issue;
       });
     });
+  }
+
+  fetchAllGitRepos() {
+    this.coreSerivce.fetchAllGitRepos().subscribe(s => this.repos = s);
   }
 
   openDialog() {
