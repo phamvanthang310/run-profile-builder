@@ -37,7 +37,6 @@ export class CoreService {
 
   private buildUrl(url: string, params: any): string {
     const complied = _.template(url);
-    console.log(complied(params));
     return complied(params);
   }
 }

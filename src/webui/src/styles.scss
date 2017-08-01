@@ -8,6 +8,7 @@ $candy-app-warn: mat-palette($mat-red);
 $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
 @include angular-material-theme($candy-app-theme);
 // End custom material theme
+$primary-color: map_get($mat-blue, 600);
 
 * {
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -21,4 +22,50 @@ body, h1, h2, h3, h4, h5 {
 md-card {
   margin-bottom: 15px;
 }
+
+md-list-item {
+  .title {
+    font-size: 18px
+  }
+
+  .sub-title {
+    font-size: 15px;
+    color: map_get($mat-grey, 500);
+  }
+}
+
+md-card-title {
+  .title {
+    line-height: 40px
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-row-reverse {
+  flex-flow: row-reverse;
+}
+
+.clickable {
+  cursor: pointer;
+  color: map_get($mat-grey, 500);
+  transition: 0.5s;
+
+  &:hover {
+    color: map_get($mat-orange, A200);
+  }
+}
+
+.snack-bar {
+  &.error {
+    background: map_get($mat-red, 500);
+  }
+
+  &.success {
+    background: $primary-color;
+  }
+}
+
 

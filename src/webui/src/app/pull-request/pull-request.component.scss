@@ -13,18 +13,9 @@
   height: 100px;
   text-align: center;
   line-height: 100px;
+
   > h1 {
     font-weight: 500;
   }
 }
 
-md-list-item {
-  .title {
-    font-size: 18px
-  }
-
-  .sub-title {
-    font-size: 15px;
-    color: #9e9e9e;
-  }
-}

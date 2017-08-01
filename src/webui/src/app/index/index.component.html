@@ -8,7 +8,7 @@
         </span>
         <!--<div style="flex-grow: 1"></div>-->
         <a md-icon-button (click)="checkoutProfile()" mdTooltip="Refresh" [mdTooltipPosition]="'right'">
-          <md-icon color="primary">refresh</md-icon>
+          <md-icon ngClass="clickable">refresh</md-icon>
         </a>
       </div>
     </md-card-title>
@@ -29,7 +29,7 @@
         </span>
         <!--<div style="flex-grow: 1"></div>-->
         <a md-icon-button (click)="fetchJiraStory()" mdTooltip="Refresh" [mdTooltipPosition]="'right'">
-          <md-icon color="primary">refresh</md-icon>
+          <md-icon ngClass="clickable">refresh</md-icon>
         </a>
       </div>
     </md-card-title>
@@ -65,7 +65,7 @@
   <!--Action button-->
   <div class="floating">
     <button md-fab mdTooltip="Generate" [mdTooltipPosition]="'left'" (click)="openDialog()">
-      <md-icon aria-hidden [style.color]="'white'">unarchive</md-icon>
+      <md-icon aria-hidden>unarchive</md-icon>
     </button>
   </div>
 </app-component-viewer>

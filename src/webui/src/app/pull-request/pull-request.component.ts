@@ -11,7 +11,7 @@ import _ from 'lodash';
   styleUrls: ['./pull-request.component.scss']
 })
 export class PullRequestComponent implements OnInit, OnDestroy {
-  readonly TITLE = 'Pull requests control';
+  readonly TITLE = 'Pull requests';
   readonly ALL_REPO = 'all';
   readonly repos: Array<any>;
   pullsGroupByRepo: Array<any>;
@@ -54,6 +54,5 @@ export class PullRequestComponent implements OnInit, OnDestroy {
         pulls: value
       });
     });
-    console.log(this.pullsGroupByRepo);
   }
 }

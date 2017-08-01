@@ -4,12 +4,12 @@
   </span>
   <div style="flex-grow: 1"></div>
   <a md-icon-button mdTooltip="Copy to clipboard" [mdTooltipPosition]="'left'">
-    <md-icon color="primary" (click)="copyToClipboard()">content_copy</md-icon>
+    <md-icon class="clickable" (click)="copyToClipboard()">content_copy</md-icon>
   </a>
 </div>
 <md-dialog-content>
   <div class="release-content" [innerHTML]="sanitizer.bypassSecurityTrustHtml(releaseContent)"></div>
 </md-dialog-content>
-<md-dialog-actions ngClass="text-right">
-  <button md-raised-button md-dialog-close color="primary">Close</button>
+<md-dialog-actions ngClass="flex flex-row-reverse">
+  <button md-raised-button md-dialog-close color="accent">Close</button>
 </md-dialog-actions>

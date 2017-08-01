@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ReleaseBuilderService} from '../services/release-builder.service';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MdSnackBar} from '@angular/material';
+import {MdSnackBar, MdSnackBarConfig} from '@angular/material';
 
 @Component({
   selector: 'app-release-dialog',
@@ -22,8 +22,23 @@ export class ReleaseDialogComponent implements OnInit {
   }
 
   copyToClipboard() {
-    this.snackBar.open('Function is not supported yet!', null, {
-      duration: 1500
-    });
+    this.makeSelectedRange();
+    const config = new MdSnackBarConfig();
+    config.extraClasses = ['snack-bar', 'success'];
+    config.duration = 1500;
+
+    this.snackBar.open('Copied to clipboard!', null, config);
+  }
+
+  private makeSelectedRange(): void {
+    const node = document.getElementsByClassName('release-content').item(0);
+    const range = document.createRange();
+    const selection = window.getSelection();
+
+    range.selectNode(node);
+    selection.removeAllRanges();
+    selection.addRange(range);
+    document.execCommand('copy');
+    selection.removeAllRanges();
   }
 }

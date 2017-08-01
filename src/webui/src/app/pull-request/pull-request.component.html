@@ -1,14 +1,20 @@
 <app-component-viewer [componentName]="TITLE">
   <md-card>
     <md-card-title>
-      <span>Pull requests</span>
+      <div class="flex">
+        <span class="title">Pull requests</span>
+        <!--<div style="flex-grow: 1"></div>-->
+        <a md-icon-button mdTooltip="Refresh" [mdTooltipPosition]="'right'">
+          <md-icon ngClass="clickable">refresh</md-icon>
+        </a>
+      </div>
+    </md-card-title>
+    <md-card-subtitle></md-card-subtitle>
+    <md-card-content>
       <md-select placeholder="All Git Repo" floatPlaceholder="never" ngClass="select" (change)="changeRepo($event)">
         <md-option [value]="ALL_REPO">All Git Repo</md-option>
         <md-option *ngFor="let repo of repos" [value]="repo.name">{{ repo.name }}</md-option>
       </md-select>
-    </md-card-title>
-    <md-card-subtitle></md-card-subtitle>
-    <md-card-content>
       <ng-template #spinner>
         <md-progress-spinner *ngIf="!pullsGroupByRepo" [mode]="'indeterminate'" color="accent" [strokeWidth]="7"
                              ngClass="loader">
@@ -16,7 +22,7 @@
       </ng-template>
       <ng-template #empty>
         <div class="empty">
-          <h1>No Available Pull Request</h1>
+          <h1>No Open Pull Request</h1>
         </div>
       </ng-template>
       <md-list *ngIf="pullsGroupByRepo; else spinner">

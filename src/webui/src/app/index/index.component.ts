@@ -38,7 +38,6 @@ export class IndexComponent implements OnInit {
     this.isLoading = true;
     this.coreSerivce.checkoutProfile().subscribe(s => {
       this.runProfiles = s.split(/\r\n|\r|\n/g).join('</br>');
-      console.log(this.runProfiles);
     }, error => {
       console.log(error);
     }, () => {
