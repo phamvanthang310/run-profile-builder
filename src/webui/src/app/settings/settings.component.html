@@ -32,7 +32,7 @@
             <td>
               <md-input-container class="full-width">
                 <input mdInput required placeholder="Jira domain" #jiraDomainInput="ngModel" [(ngModel)]="jiraDomain"
-                       name="jiraDomainInput">
+                       name="jiraDomainInput" disabled>
                 <md-error *ngIf="jiraDomainInput.touched && jiraDomainInput.invalid">
                   Jira domain is <strong>required</strong>
                 </md-error>

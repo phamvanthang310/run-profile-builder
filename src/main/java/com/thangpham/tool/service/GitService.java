@@ -61,7 +61,7 @@ public class GitService extends AbstractGateway implements IGitService {
         return gitProperties.getRepos().stream().map(repoName -> {
             Repo repo = new Repo();
             repo.setName(repoName);
-            repo.setJenkinBuildName(JENKIN_BUILD_PREFIX + repoName);
+            repo.setJenkinBuildName(JENKIN_BUILD_PREFIX + "-" + repoName);
             return repo;
         }).collect(Collectors.toList());
     }

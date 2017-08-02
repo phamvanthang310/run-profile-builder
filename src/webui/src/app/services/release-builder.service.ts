@@ -40,7 +40,7 @@ export class ReleaseBuilderService {
   private buildCheckOutTags(repos: Array<any>, runProfile: string): string {
     if (!_.isEmpty(repos)) {
       return repos.filter(repo => repo.checked).map(repo => {
-        return `<li>${repo.name}: tag:${repo.releaseTagPrefix}-${repo.name}-${this.extractBuildNumber(repo.name, runProfile)}</li>`;
+        return `<li>${repo.name}: tag:${repo.jenkinBuildName}-${this.extractBuildNumber(repo.name, runProfile)}</li>`;
       }).join('');
     }
     return '';

@@ -14,9 +14,9 @@ export class SettingsComponent implements OnInit {
   jiraDomain: string;
 
   constructor(private title: Title, private coreService: CoreService) {
-    this.checkProfileUrl = '/cgi-bin/checkprofile.py';
-    this.sprint = 'Dolphin 2017.S7.2';
-    this.jiraDomain = '/rest/api/2/search';
+    this.checkProfileUrl = 'ci01.dolphin.lexisnexisrisk.com/cgi-bin/checkprofile.py';
+    this.sprint = 'Dolphin 2017.S8.1';
+    this.jiraDomain = 'https://jira.rsi.lexisnexis.com';
   }
 
   ngOnInit() {

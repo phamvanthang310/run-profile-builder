@@ -3,7 +3,7 @@ server:
 
 jira:
   domain: https://plosdb01.hmsonline.com
-  fetch-story-url: /rest/api/2/search?jql=project = MAS AND issuetype in (Bug, Story, "Bug Sub-Task") AND Sprint = "{sprint}"
+  fetch-story-url: /rest/api/2/search?jql=project = MAS AND issuetype in (Bug, Story, "Bug Sub-Task", Debt) AND Sprint = "{sprint}"
   token: UGhhbVRoMDFAcmlzazpIQHJkd29yaw==
 
 git:
