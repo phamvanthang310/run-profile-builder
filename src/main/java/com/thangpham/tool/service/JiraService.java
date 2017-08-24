@@ -2,6 +2,7 @@ package com.thangpham.tool.service;
 
 import com.thangpham.tool.configs.JiraProperties;
 import com.thangpham.tool.models.Jira;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpEntity;
@@ -35,9 +36,21 @@ public class JiraService extends AbstractGateway implements IJiraService {
         Map<String, String> requestParams = new HashMap<>();
         requestParams.put("sprint", sprint);
 
+        return restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(buildRequestHeader()), Jira.class, requestParams).getBody();
+    }
+
+    @Override
+    public Jira.Issue getIssueById(String id) {
+        String url = jiraProperties.getDomain() + jiraProperties.getGetByIdUrl();
+        Map<String, String> requestParams = new HashMap<>();
+        requestParams.put("issueId", id);
+
+        return restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(buildRequestHeader()), Jira.Issue.class, requestParams).getBody();
+    }
+
+    private HttpHeaders buildRequestHeader() {
         HttpHeaders headers = new HttpHeaders();
         headers.put("Authorization", Collections.singletonList("Basic " + jiraProperties.getToken()));
-
-        return restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers), Jira.class, requestParams).getBody();
+        return headers;
     }
 }

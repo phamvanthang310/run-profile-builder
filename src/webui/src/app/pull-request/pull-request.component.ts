@@ -18,7 +18,7 @@ export class PullRequestComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(private title: Title, private coreSerivce: CoreService, private config: ConfigService) {
-    this.repos = this.config.getRepos();
+    this.repos = [];
   }
 
   ngOnInit() {

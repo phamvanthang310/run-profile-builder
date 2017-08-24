@@ -24,12 +24,12 @@ export class IndexComponent implements OnInit {
   constructor(private title: Title, private coreSerivce: CoreService, public sanitizer: DomSanitizer,
               public dialog: MdDialog, private config: ConfigService) {
     this.baserUrl = 'ci01.dolphin.lexisnexisrisk.com/cgi-bin/checkprofile.py';
-    this.sprint = 'Dolphin 2017.S8.1';
     this.isLoading = false;
   }
 
   ngOnInit() {
     this.title.setTitle(this.TITLE);
+    this.sprint = this.config.getSprint();
     this.checkoutProfile();
     this.fetchJiraStory();
     this.fetchAllGitRepos();

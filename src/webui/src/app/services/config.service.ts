@@ -1,64 +1,26 @@
 import {Injectable} from '@angular/core';
+import {LocalStorageService} from "./local-storage.service";
+import _ from 'lodash';
 
 @Injectable()
 export class ConfigService {
-  readonly repos = [
-    {
-      name: 'master-audit-queue-ui',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'master-audit-link-ui',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'master-audit-resolution-ui',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'master-audit-ws',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'master-audit-batch-ws',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'master-audit-queue-ws',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'master-audit-export-ws',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'master-audit-header-sources-ws',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'master-audit-resolution-ws',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'lnhc-client-id-enumeration-ws',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'mock-auth-server',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
-    }, {
-      name: 'mock-roxie-server',
-      releaseTagPrefix: 'jenkins',
-      pulls: []
+  private readonly SPRINT_KEY = 'sprint';
+  private readonly DEFAULT_SPRINT = 'Dolphin 2017.S8.1';
+
+  constructor(private localStorageService: LocalStorageService) {
+
+  }
+
+  getSprint() {
+    const sprint = this.localStorageService.get(this.SPRINT_KEY);
+    if (_.isEmpty(sprint)) {
+      this.setSprint(this.DEFAULT_SPRINT);
+      return this.getSprint();
     }
-  ];
-
-  constructor() {
+    return sprint;
   }
 
-  getRepos(): Array<any> {
-    return this.repos;
+  setSprint(value) {
+    return this.localStorageService.set(this.SPRINT_KEY, value);
   }
-
 }

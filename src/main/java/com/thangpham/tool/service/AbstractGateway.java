@@ -1,8 +1,10 @@
 package com.thangpham.tool.service;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.Map;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriTemplate;
 

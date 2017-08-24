@@ -15,6 +15,7 @@ import {ReleaseDialogComponent} from './release-dialog/release-dialog.component'
 import {ReleaseBuilderService} from './services/release-builder.service';
 import {PullRequestComponent} from './pull-request/pull-request.component';
 import {ConfigService} from './services/config.service';
+import {LocalStorageService} from "./services/local-storage.service";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {ConfigService} from './services/config.service';
   providers: [
     CoreService,
     ReleaseBuilderService,
+    LocalStorageService,
     ConfigService
   ],
   entryComponents: [

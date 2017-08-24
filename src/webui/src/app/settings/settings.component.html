@@ -4,13 +4,13 @@
     <md-card-title>Core Settings</md-card-title>
     <md-card-subtitle></md-card-subtitle>
     <md-card-content>
-      <form class="settings" #commonSettings="ngForm" novalidate>
+      <form class="settings" #commonSettings="ngForm" novalidate (submit)="applyChanges()">
         <table class="full-width" cellspacing="1">
           <tr>
             <td>
               <md-input-container class="full-width">
                 <input mdInput required placeholder="Checking profile url" #checkProfileUrlInput="ngModel"
-                       name="checkProfileUrlInput" [(ngModel)]="checkProfileUrl">
+                       name="checkProfileUrlInput" [(ngModel)]="checkProfileUrl" disabled>
                 <md-error *ngIf="checkProfileUrlInput.touched && checkProfileUrlInput.invalid">
                   Checking profile url is <strong>required</strong>
                 </md-error>
