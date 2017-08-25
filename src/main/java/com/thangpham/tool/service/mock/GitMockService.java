@@ -1,4 +1,4 @@
-package com.thangpham.tool.mock;
+package com.thangpham.tool.service.mock;
 
 import java.util.List;
 import java.util.stream.Collectors;

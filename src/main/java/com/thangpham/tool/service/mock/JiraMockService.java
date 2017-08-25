@@ -1,4 +1,9 @@
-package com.thangpham.tool.mock;
+package com.thangpham.tool.service.mock;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -24,10 +29,11 @@ public class JiraMockService implements IJiraService {
     }
 
     @Override
-    public Jira fetchJiraStory(String sprint) {
+    public List<Jira.Issue> fetchJiraStory(String sprint) {
         try {
             JsonObjectMapper objectMapper = JsonObjectMapper.get();
-            return objectMapper.readValue(jiraProperties.getStories(), Jira.class);
+            Jira jira = objectMapper.readValue(jiraProperties.getStories(), Jira.class);
+            return transformData(jira);
         } catch (Exception e) {
             LOGGER.error("Cannot parse pull request data from mockService", e);
         }
@@ -35,10 +41,16 @@ public class JiraMockService implements IJiraService {
     }
 
     @Override
-    public Jira.Issue getIssueById(String id) {
-        return fetchJiraStory(StringUtils.EMPTY).getIssues().stream()
-                .filter(issue -> id.equals(issue.getKey()))
-                .findFirst()
-                .orElse(null);
+    public List<Jira.Issue> getIssueById(String id) {
+        return fetchJiraStory(StringUtils.EMPTY).stream()
+                .filter(i -> id.equals(i.getKey()))
+                .collect(Collectors.toList());
+    }
+
+    private List<Jira.Issue> transformData(Jira jira) {
+        return jira.getIssues().stream().map(issue -> {
+            issue.setHref(String.format("%s/%s", jiraProperties.getDomain(), issue.getKey()));
+            return issue;
+        }).collect(Collectors.toList());
     }
 }

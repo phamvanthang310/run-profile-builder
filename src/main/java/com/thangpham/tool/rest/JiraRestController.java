@@ -1,5 +1,7 @@
 package com.thangpham.tool.rest;
 
+import java.util.List;
+
 import com.thangpham.tool.models.Jira;
 import com.thangpham.tool.service.IJiraService;
 
@@ -23,12 +25,12 @@ public class JiraRestController {
     }
 
     @RequestMapping(value = "/{sprint}", method = RequestMethod.GET)
-    public Jira getJiras(@PathVariable String sprint) {
+    public List<Jira.Issue> getJiras(@PathVariable String sprint) {
         return jiraService.fetchJiraStory(sprint);
     }
 
     @RequestMapping(value = "/id/{issueId}", method = RequestMethod.GET)
-    public Jira.Issue getIssue(@PathVariable String issueId) {
+    public List<Jira.Issue> getIssue(@PathVariable String issueId) {
         return jiraService.getIssueById(issueId);
     }
 }

@@ -13,13 +13,13 @@ import _ from 'lodash';
 })
 export class IndexComponent implements OnInit {
   readonly TITLE = 'Generate Release Email';
-  readonly JIRA_HREF = 'https://jira.rsi.lexisnexis.com/browse';
   baserUrl: string;
   sprint: string;
   runProfiles: string;
   isLoading: boolean;
-  stories: Array<any>;
+  issues: Array<any>;
   repos: Array<any>;
+  issueId: string;
 
   constructor(private title: Title, private coreSerivce: CoreService, public sanitizer: DomSanitizer,
               public dialog: MdDialog, private config: ConfigService) {
@@ -49,10 +49,7 @@ export class IndexComponent implements OnInit {
 
   fetchJiraStory() {
     this.coreSerivce.fetchJira(this.sprint).subscribe(s => {
-      this.stories = s.issues.map(issue => {
-        issue.href = `${this.JIRA_HREF}/${issue.key}`;
-        return issue;
-      });
+      this.issues = s;
     });
   }
 
@@ -62,6 +59,19 @@ export class IndexComponent implements OnInit {
       .subscribe(s => this.repos = s.filter(repo => !_.endsWith(repo.name, 'config')));
   }
 
+  getJiraIssue() {
+    this.coreSerivce.getJiraIssue(this.issueId.toUpperCase()).subscribe(issues => {
+      let message = 'success';
+      if (_.isEmpty(issues)) {
+        message = 'fail';
+      } else {
+        this.issues.unshift(issues[0]);
+        this.issueId = '';
+      }
+      // TODO: show snach bar with message
+    });
+  }
+
   openDialog() {
     const config: MdDialogConfig = new MdDialogConfig();
     config.width = '1000px';
@@ -69,7 +79,7 @@ export class IndexComponent implements OnInit {
     dialogRef.componentInstance.data = {
       sprint: this.sprint,
       runProfiles: this.runProfiles,
-      stories: this.stories,
+      issues: this.issues,
       repos: this.repos
     };
   }

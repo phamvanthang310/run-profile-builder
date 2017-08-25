@@ -29,7 +29,8 @@ export class SettingsComponent implements OnInit {
   applyChanges() {
     this.configService.setSprint(this.sprint);
     this.snackBar.open('Change is applied sucessfully!', null, {
-      duration: 1500
+      duration: 1500,
+      extraClasses: ['snack-bar', 'success']
     });
   }
 

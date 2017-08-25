@@ -3,8 +3,8 @@ package com.thangpham.tool.models;
 import java.io.Serializable;
 import java.util.List;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -12,7 +12,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@NoArgsConstructor
+@Builder
 public class Jira implements Serializable {
     private static final long serialVersionUID = -3664377498916156339L;
     private int total;
@@ -23,6 +23,7 @@ public class Jira implements Serializable {
     public static class Issue {
         private String key;
         private Fields fields;
+        private String href; // Custom fields
     }
 
     @Getter

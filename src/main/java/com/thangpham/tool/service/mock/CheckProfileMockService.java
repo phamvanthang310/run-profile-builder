@@ -1,4 +1,4 @@
-package com.thangpham.tool.mock;
+package com.thangpham.tool.service.mock;
 
 import com.thangpham.tool.configs.CheckProfileProperties;
 import com.thangpham.tool.service.ICheckProfileService;

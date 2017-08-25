@@ -20,7 +20,7 @@
       </div>
     </md-card-content>
   </md-card>
-  <!--Jira stories-->
+  <!--Jira issues-->
   <md-card id="jira">
     <md-card-title>
       <div class="flex">
@@ -35,10 +35,15 @@
     </md-card-title>
     <md-card-subtitle>{{sprint}}</md-card-subtitle>
     <md-card-content>
-      <md-progress-spinner *ngIf="!stories" [mode]="'indeterminate'" color="accent" [strokeWidth]="7" ngClass="loader">
+      <form #jiraForm="ngForm" novalidate (submit)="getJiraIssue()">
+        <md-input-container [hintLabel]="'Get new Jira Issue by ID (lowcase is acceptable).'" ngClass="full-width medium-font">
+          <input mdInput placeholder="Issue ID" value="" [(ngModel)]="issueId" name="issueId">
+        </md-input-container>
+      </form>
+      <md-progress-spinner *ngIf="!issues" [mode]="'indeterminate'" color="accent" [strokeWidth]="7" ngClass="loader">
       </md-progress-spinner>
-      <md-list *ngIf="stories">
-        <md-list-item *ngFor="let story of stories">
+      <md-list *ngIf="issues">
+        <md-list-item *ngFor="let story of issues">
           <md-icon md-list-icon>bookmark_border</md-icon>
           <p md-line ngClass="title"><a [href]="story.href" target="_blank">{{story.key}}:</a> {{story.fields.summary}}
           </p>

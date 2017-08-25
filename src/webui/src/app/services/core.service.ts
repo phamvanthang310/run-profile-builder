@@ -6,11 +6,12 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CoreService {
-  readonly RUN_PROFILE_URL = '/api/profile';
-  readonly JIRA_URL = '/api/jira/${sprint}';
-  readonly GIT_URL = '/api/git/${repoName}';
-  readonly ALL_GIT_PULL_URL = '/api/git';
-  readonly ALL_GIT_REPO = '/api/git/repos';
+  private readonly RUN_PROFILE_URL = '/api/profile';
+  private readonly JIRA_URL = '/api/jira/${sprint}';
+  private readonly JIRA_BY_ID_URL = '/api/jira/id/${id}';
+  private readonly GIT_URL = '/api/git/${repoName}';
+  private readonly ALL_GIT_PULL_URL = '/api/git';
+  private readonly ALL_GIT_REPO = '/api/git/repos';
 
   constructor(private http: Http) {
   }
@@ -21,6 +22,10 @@ export class CoreService {
 
   fetchJira(sprint: string): Observable<any> {
     return this.http.get(this.buildUrl(this.JIRA_URL, {sprint: sprint})).map((s: Response) => s.json());
+  }
+
+  getJiraIssue(issueId: string): Observable<any> {
+    return this.http.get(this.buildUrl(this.JIRA_BY_ID_URL, {id: issueId})).map((s: Response) => s.json());
   }
 
   fetchGitPull(repoName: string): Observable<any> {
