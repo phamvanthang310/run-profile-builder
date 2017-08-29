@@ -13,3 +13,17 @@
   right: 24px;
   position: fixed;
 }
+
+.high-light {
+  animation: flash 5s;
+}
+
+@keyframes flash {
+  0% {
+    background-color: #FFF9C4;
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}

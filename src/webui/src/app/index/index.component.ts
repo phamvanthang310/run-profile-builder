@@ -59,17 +59,26 @@ export class IndexComponent implements OnInit {
       .subscribe(s => this.repos = s.filter(repo => !_.endsWith(repo.name, 'config')));
   }
 
-  getJiraIssue() {
-    this.coreSerivce.getJiraIssue(this.issueId.toUpperCase()).subscribe(issues => {
-      let message = 'success';
-      if (_.isEmpty(issues)) {
-        message = 'fail';
-      } else {
-        this.issues.unshift(issues[0]);
-        this.issueId = '';
-      }
-      // TODO: show snach bar with message
-    });
+  getJiraIssue(event) {
+    event.preventDefault();
+
+    // Find first existed issue
+    const issue = this.issues.filter(value => value.key === this.issueId.toUpperCase()).pop();
+
+    // Request to get new
+    if (_.isNil(issue)) {
+      this.coreSerivce.getJiraIssue(this.issueId.toUpperCase()).subscribe(issues => {
+        if (!_.isEmpty(issues)) {
+          const newIssue = issues[0];
+          this.issues.unshift(newIssue);
+          this.issueId = '';
+
+          this.highLightIssue(newIssue);
+        }
+      });
+    } else {
+      this.highLightIssue(issue);
+    }
   }
 
   openDialog() {
@@ -82,5 +91,9 @@ export class IndexComponent implements OnInit {
       issues: this.issues,
       repos: this.repos
     };
+  }
+
+  private highLightIssue(issue) {
+    issue.style = 'high-light'; // populate high-light class style
   }
 }

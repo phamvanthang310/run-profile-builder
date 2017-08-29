@@ -14,9 +14,11 @@
     </md-card-title>
     <md-card-subtitle>{{baserUrl}}</md-card-subtitle>
     <md-card-content>
-      <md-progress-spinner *ngIf="isLoading" [mode]="'indeterminate'" color="accent" [strokeWidth]="7" ngClass="loader">
-      </md-progress-spinner>
-      <div class="profile-details" [innerHTML]="sanitizer.bypassSecurityTrustHtml(runProfiles)" *ngIf="runProfiles">
+      <ng-template #runprofileLoader>
+        <md-progress-spinner [mode]="'indeterminate'" color="accent" [strokeWidth]="7" ngClass="loader">
+        </md-progress-spinner>
+      </ng-template>
+      <div class="profile-details" [innerHTML]="sanitizer.bypassSecurityTrustHtml(runProfiles)" *ngIf="runProfiles; else runprofileLoader">
       </div>
     </md-card-content>
   </md-card>
@@ -35,7 +37,7 @@
     </md-card-title>
     <md-card-subtitle>{{sprint}}</md-card-subtitle>
     <md-card-content>
-      <form #jiraForm="ngForm" novalidate (submit)="getJiraIssue()">
+      <form #jiraForm="ngForm" novalidate (submit)="getJiraIssue($event)">
         <md-input-container [hintLabel]="'Get new Jira Issue by ID (lowcase is acceptable).'" ngClass="full-width medium-font">
           <input mdInput placeholder="Issue ID" value="" [(ngModel)]="issueId" name="issueId">
         </md-input-container>
@@ -43,7 +45,7 @@
       <md-progress-spinner *ngIf="!issues" [mode]="'indeterminate'" color="accent" [strokeWidth]="7" ngClass="loader">
       </md-progress-spinner>
       <md-list *ngIf="issues">
-        <md-list-item *ngFor="let story of issues">
+        <md-list-item *ngFor="let story of issues" [ngClass]="story.style">
           <md-icon md-list-icon>bookmark_border</md-icon>
           <p md-line ngClass="title"><a [href]="story.href" target="_blank">{{story.key}}:</a> {{story.fields.summary}}
           </p>

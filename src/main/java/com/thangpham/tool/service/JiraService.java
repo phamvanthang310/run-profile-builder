@@ -3,7 +3,7 @@ package com.thangpham.tool.service;
 import com.thangpham.tool.configs.JiraProperties;
 import com.thangpham.tool.models.Jira;
 
-import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpEntity;
@@ -61,7 +61,8 @@ public class JiraService extends AbstractGateway implements IJiraService {
 
     private List<Jira.Issue> transformData(Jira jira) {
         return jira.getIssues().stream().map(issue -> {
-            Jira.Issue newIssue = ObjectUtils.clone(issue);
+            Jira.Issue newIssue = new Jira.Issue();
+            BeanUtils.copyProperties(issue, newIssue);
             newIssue.setHref(String.format("%s/browse/%s", jiraProperties.getDomain(), issue.getKey()));
             return newIssue;
         }).collect(Collectors.toList());
