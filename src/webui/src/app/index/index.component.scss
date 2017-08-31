@@ -27,3 +27,11 @@
     background-color: transparent;
   }
 }
+
+.radio-button-group{
+  display: inline-flex;
+  flex-direction: column;
+}
+.radio-button {
+  margin: 10px;
+}

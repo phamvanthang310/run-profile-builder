@@ -16,7 +16,7 @@ export class IndexComponent implements OnInit {
   baserUrl: string;
   sprint: string;
   runProfiles: string;
-  isLoading: boolean;
+  isDbChange: boolean;
   issues: Array<any>;
   repos: Array<any>;
   issueId: string;
@@ -24,7 +24,7 @@ export class IndexComponent implements OnInit {
   constructor(private title: Title, private coreSerivce: CoreService, public sanitizer: DomSanitizer,
               public dialog: MdDialog, private config: ConfigService) {
     this.baserUrl = 'ci01.dolphin.lexisnexisrisk.com/cgi-bin/checkprofile.py';
-    this.isLoading = false;
+    this.isDbChange = false;
   }
 
   ngOnInit() {
@@ -37,17 +37,15 @@ export class IndexComponent implements OnInit {
 
   checkoutProfile() {
     this.runProfiles = null;
-    this.isLoading = true;
     this.coreSerivce.checkoutProfile().subscribe(s => {
       this.runProfiles = s.split(/\r\n|\r|\n/g).join('</br>');
     }, error => {
       console.log(error);
-    }, () => {
-      this.isLoading = false;
     });
   }
 
   fetchJiraStory() {
+    this.issues = null;
     this.coreSerivce.fetchJira(this.sprint).subscribe(s => {
       this.issues = s;
     });
@@ -89,7 +87,8 @@ export class IndexComponent implements OnInit {
       sprint: this.sprint,
       runProfiles: this.runProfiles,
       issues: this.issues,
-      repos: this.repos
+      repos: this.repos,
+      isDbChange: this.isDbChange
     };
   }
 

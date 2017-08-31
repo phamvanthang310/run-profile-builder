@@ -45,7 +45,7 @@
       <md-progress-spinner *ngIf="!issues" [mode]="'indeterminate'" color="accent" [strokeWidth]="7" ngClass="loader">
       </md-progress-spinner>
       <md-list *ngIf="issues">
-        <md-list-item *ngFor="let story of issues" [ngClass]="story.style">
+        <md-list-item *ngFor="let story of issues" [ngClass]="story.style" [attr.id]="story.key">
           <md-icon md-list-icon>bookmark_border</md-icon>
           <p md-line ngClass="title"><a [href]="story.href" target="_blank">{{story.key}}:</a> {{story.fields.summary}}
           </p>
@@ -67,6 +67,18 @@
           <md-checkbox [(ngModel)]="repo.checked"></md-checkbox>
         </md-list-item>
       </md-list>
+    </md-card-content>
+  </md-card>
+  <!--Is DB Change-->
+  <md-card id="db-change">
+    <md-card-title>Is Database Changes?</md-card-title>
+    <md-card-content>
+      <form #dbForm="ngForm" novalidate>
+        <md-radio-group [(ngModel)]="isDbChange" name="isDbChange" class="radio-button-group">
+          <md-radio-button class="radio-button" [value]="true">Yes</md-radio-button>
+          <md-radio-button class="radio-button" [value]="false">No</md-radio-button>
+        </md-radio-group>
+      </form>
     </md-card-content>
   </md-card>
   <!--Action button-->

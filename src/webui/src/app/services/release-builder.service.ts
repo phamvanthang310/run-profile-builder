@@ -8,7 +8,7 @@ export class ReleaseBuilderService {
   }
 
   buildRelease(sprint: string, runProfile: string, jiraStories: Array<any>, repoChanges: Array<any>,
-               isDataBaseChanged = false): string {
+               isDbChange = false): string {
     const template = `
     <p>Hi Team,</p>
       <p>We have next release for sprint: ${sprint}</p>
@@ -22,7 +22,13 @@ export class ReleaseBuilderService {
       <ul>
         ${this.buildChanges(jiraStories)}
       </ul>
-      <p><b><u>Database change:</u></b> ${isDataBaseChanged ? 'YES' : 'NO'}</p>
+      <p>
+        <b><u>Database change:</u></b>
+        ${isDbChange ? '<span style="color: red"> YES - (Just select initDatabase option when deploying the run-profile)</span>' : 'NO'}
+      </p>
+      <p>
+        <b><u>Config change:</u></b>
+      </p>
     `;
     return template;
   }
@@ -53,6 +59,10 @@ export class ReleaseBuilderService {
       }).join('');
     }
     return '';
+  }
+
+  private buildDbChange(isDbChange: boolean) {
+    return isDbChange ? 'NO' : ''
   }
 
   private extractBuildNumber(repoName: string, runProfile: string): string {
