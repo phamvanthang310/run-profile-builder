@@ -81,6 +81,18 @@
       </form>
     </md-card-content>
   </md-card>
+  <!--Is Config Change-->
+  <md-card id="config-change">
+    <md-card-title>Is Config Changes?</md-card-title>
+    <md-card-content>
+      <form #dbForm="ngForm" novalidate>
+        <md-radio-group [(ngModel)]="isConfigChange" name="isConfigChange" class="radio-button-group">
+          <md-radio-button class="radio-button" [value]="true">Yes</md-radio-button>
+          <md-radio-button class="radio-button" [value]="false">No</md-radio-button>
+        </md-radio-group>
+      </form>
+    </md-card-content>
+  </md-card>
   <!--Action button-->
   <div class="floating">
     <button md-fab mdTooltip="Generate" [mdTooltipPosition]="'left'" (click)="openDialog()">

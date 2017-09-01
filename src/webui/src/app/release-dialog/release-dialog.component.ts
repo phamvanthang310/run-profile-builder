@@ -18,7 +18,7 @@ export class ReleaseDialogComponent implements OnInit {
 
   ngOnInit() {
     this.releaseContent = this.releaseBuilderService.buildRelease(this.data.sprint, this.data.runProfiles,
-      this.data.issues, this.data.repos, this.data.isDbChange);
+      this.data.issues, this.data.repos, this.data.isDbChange, this.data.isConfigChange);
   }
 
   copyToClipboard() {

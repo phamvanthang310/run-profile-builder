@@ -8,9 +8,9 @@ export class ReleaseBuilderService {
   }
 
   buildRelease(sprint: string, runProfile: string, jiraStories: Array<any>, repoChanges: Array<any>,
-               isDbChange = false): string {
+               isDbChange = false, isConfigChange = false): string {
     const template = `
-    <p>Hi Team,</p>
+      <p>Hi Team,</p>
       <p>We have next release for sprint: ${sprint}</p>
       <p><b><u>Runprofile:</u></b></p>
       <p>${this.buildRunProfiles(repoChanges, runProfile)}</p>
@@ -28,6 +28,7 @@ export class ReleaseBuilderService {
       </p>
       <p>
         <b><u>Config change:</u></b>
+        ${isConfigChange ? '<span style="color: red"> YES </span>' : 'NO'}
       </p>
     `;
     return template;
@@ -59,10 +60,6 @@ export class ReleaseBuilderService {
       }).join('');
     }
     return '';
-  }
-
-  private buildDbChange(isDbChange: boolean) {
-    return isDbChange ? 'NO' : ''
   }
 
   private extractBuildNumber(repoName: string, runProfile: string): string {

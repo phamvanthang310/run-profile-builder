@@ -17,6 +17,7 @@ export class IndexComponent implements OnInit {
   sprint: string;
   runProfiles: string;
   isDbChange: boolean;
+  isConfigChange: boolean;
   issues: Array<any>;
   repos: Array<any>;
   issueId: string;
@@ -25,6 +26,7 @@ export class IndexComponent implements OnInit {
               public dialog: MdDialog, private config: ConfigService) {
     this.baserUrl = 'ci01.dolphin.lexisnexisrisk.com/cgi-bin/checkprofile.py';
     this.isDbChange = false;
+    this.isConfigChange = false;
   }
 
   ngOnInit() {
@@ -88,7 +90,8 @@ export class IndexComponent implements OnInit {
       runProfiles: this.runProfiles,
       issues: this.issues,
       repos: this.repos,
-      isDbChange: this.isDbChange
+      isDbChange: this.isDbChange,
+      isConfigChange: this.isConfigChange
     };
   }
 
