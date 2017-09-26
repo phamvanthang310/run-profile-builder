@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ReleaseBuilderService} from '../services/release-builder.service';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MdSnackBar, MdSnackBarConfig} from '@angular/material';
+import {MdSnackBar} from '@angular/material';
+import {UtilsService} from "../services/utils.service";
 
 @Component({
   selector: 'app-release-dialog',
@@ -13,7 +14,7 @@ export class ReleaseDialogComponent implements OnInit {
   releaseContent: string;
 
   constructor(private releaseBuilderService: ReleaseBuilderService, private snackBar: MdSnackBar,
-              public sanitizer: DomSanitizer) {
+              public sanitizer: DomSanitizer, private utils: UtilsService) {
   }
 
   ngOnInit() {
@@ -22,23 +23,6 @@ export class ReleaseDialogComponent implements OnInit {
   }
 
   copyToClipboard() {
-    this.makeSelectedRange();
-    const config = new MdSnackBarConfig();
-    config.extraClasses = ['snack-bar', 'success'];
-    config.duration = 1500;
-
-    this.snackBar.open('Copied to clipboard!', null, config);
-  }
-
-  private makeSelectedRange(): void {
-    const node = document.getElementsByClassName('release-content').item(0);
-    const range = document.createRange();
-    const selection = window.getSelection();
-
-    range.selectNode(node);
-    selection.removeAllRanges();
-    selection.addRange(range);
-    document.execCommand('copy');
-    selection.removeAllRanges();
+    this.utils.copyToClipboard('.release-content');
   }
 }

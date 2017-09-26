@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {DomSanitizer, Title} from '@angular/platform-browser';
-import {CoreService} from '../services/core.service';
+import {CoreService} from '../../services/core.service';
 import {MdDialog, MdDialogConfig} from '@angular/material';
-import {ReleaseDialogComponent} from '../release-dialog/release-dialog.component';
-import {ConfigService} from '../services/config.service';
+import {ReleaseDialogComponent} from '../../release-dialog/release-dialog.component';
+import {ConfigService} from '../../services/config.service';
 import _ from 'lodash';
 
 @Component({

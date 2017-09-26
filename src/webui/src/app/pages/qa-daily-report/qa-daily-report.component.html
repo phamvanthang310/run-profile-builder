@@ -1,0 +1,39 @@
+<app-component-viewer [componentName]="TITLE">
+  <md-card>
+    <md-card-title>
+      <div class="flex">
+        <span class="title">{{sprint}} Issues</span>
+        <a md-icon-button mdTooltip="Refresh" [mdTooltipPosition]="'right'" (click)="refresh()">
+          <md-icon ngClass="clickable">refresh</md-icon>
+        </a>
+      </div>
+    </md-card-title>
+    <md-card-content>
+      <div class="row" *ngIf="issues; else loadding">
+        <h1 class="item item_header">Available Issues</h1>
+        <h1 class="item item_header">Work Done/Completed</h1>
+        <div class="item">
+          <app-draggable-issue-list [(issues)]="issues"></app-draggable-issue-list>
+        </div>
+        <div class="item">
+          <app-draggable-issue-list [(issues)]="doneIssues"></app-draggable-issue-list>
+
+          <h1 class="item_header">In Progress & Planning</h1>
+          <app-draggable-issue-list [(issues)]="inProgressIssues"></app-draggable-issue-list>
+        </div>
+      </div>
+
+      <ng-template #loadding>
+        <md-progress-spinner *ngIf="!issues" [mode]="'indeterminate'" color="accent" [strokeWidth]="7"
+                             ngClass="loader">
+        </md-progress-spinner>
+      </ng-template>
+    </md-card-content>
+  </md-card>
+  <!--Action button-->
+  <div class="floating">
+    <button md-fab mdTooltip="Generate" [mdTooltipPosition]="'left'" (click)="openDialog()">
+      <md-icon aria-hidden>unarchive</md-icon>
+    </button>
+  </div>
+</app-component-viewer>

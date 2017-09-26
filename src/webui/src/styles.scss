@@ -79,3 +79,15 @@ md-card-title {
 .medium-font {
   font-size: medium;
 }
+
+md-progress-spinner.loader {
+  height: 50px;
+  width: 50px;
+  margin: auto;
+}
+
+.floating {
+  bottom: 45px;
+  right: 24px;
+  position: fixed;
+}

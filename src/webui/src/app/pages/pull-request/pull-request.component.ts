@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CoreService} from '../services/core.service';
+import {CoreService} from '../../services/core.service';
 import {Title} from '@angular/platform-browser';
-import {ConfigService} from '../services/config.service';
+import {ConfigService} from '../../services/config.service';
 import {Subscription} from 'rxjs/Subscription';
 import _ from 'lodash';
 

@@ -5,7 +5,7 @@
 
     <groupId>com.thangpham</groupId>
     <artifactId>release-supporting-tool</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>release-supporting-tool</name>
