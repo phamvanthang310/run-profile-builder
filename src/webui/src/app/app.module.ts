@@ -7,7 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ComponentViewerComponent} from './component-viewer/component-viewer.component';
 import {ErrorPageComponent} from './pages/error-page/error-page.component';
 import {AppRoutingModule} from './app.routing.module';
-import {SettingsComponent} from './settings/settings.component';
+import {SettingsComponent} from './pages/settings/settings.component';
 import {FormsModule} from '@angular/forms';
 import {CoreService} from './services/core.service';
 import {HttpModule} from '@angular/http';

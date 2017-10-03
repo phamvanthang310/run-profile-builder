@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import {MdSnackBar, MdSnackBarConfig} from "@angular/material";
+import {MdDialog, MdDialogConfig, MdSnackBar, MdSnackBarConfig} from "@angular/material";
+import {ComponentType} from "@angular/cdk/portal";
 
 @Injectable()
 export class UtilsService {
 
-  constructor(private snackBar: MdSnackBar) {
+  constructor(public snackBar: MdSnackBar, public dialog: MdDialog) {
   }
 
   public copyToClipboard(selector: string): void {
@@ -27,5 +28,17 @@ export class UtilsService {
 
   public displaySnackBarWithoutAction(message: string, config: MdSnackBarConfig = {}) {
     this.snackBar.open(message, null, config);
+  }
+
+  public openDialog(data: any, dialogComponent: ComponentType<any>) {
+    let config: MdDialogConfig = new MdDialogConfig();
+    config.width = '1000px';
+    config.data = data;
+
+    this.dialog.open(dialogComponent, config);
+  }
+
+  public getInstanceDate(): string {
+    return new Date().toLocaleString('en-US', {year: 'numeric', month: 'numeric', day: 'numeric'});
   }
 }

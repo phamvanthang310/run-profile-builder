@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Title} from "@angular/platform-browser";
 import {CoreService} from "../../services/core.service";
 import {ConfigService} from "../../services/config.service";
+import {QaDailyReportBuilderService} from "../../services/qa-daily-report-builder.service";
+import {ReleaseDialogComponent} from "../../release-dialog/release-dialog.component";
+import {UtilsService} from "../../services/utils.service";
 
 @Component({
   selector: 'app-qa-daily-report',
@@ -15,7 +18,8 @@ export class QaDailyReportComponent implements OnInit {
   public inProgressIssues: Array<any>;
   public sprint: string;
 
-  constructor(private title: Title, private coreService: CoreService, private configService: ConfigService) {
+  constructor(public title: Title, public coreService: CoreService, public configService: ConfigService,
+              public builder: QaDailyReportBuilderService, public utils: UtilsService) {
     title.setTitle(this.TITLE);
     this.sprint = this.configService.getSprint();
     this.doneIssues = [];
@@ -32,7 +36,11 @@ export class QaDailyReportComponent implements OnInit {
   }
 
   public openDialog() {
-
+    const generatedContent = this.builder.build(this.issues, this.doneIssues, this.inProgressIssues);
+    this.utils.openDialog({
+      content: generatedContent,
+      title: `[Dolphin] Daily status ${this.utils.getInstanceDate()}`
+    }, ReleaseDialogComponent);
   }
 
   private fetchIssues() {

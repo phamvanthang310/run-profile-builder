@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {DomSanitizer, Title} from '@angular/platform-browser';
 import {CoreService} from '../../services/core.service';
-import {MdDialog, MdDialogConfig} from '@angular/material';
-import {ReleaseDialogComponent} from '../../release-dialog/release-dialog.component';
 import {ConfigService} from '../../services/config.service';
 import _ from 'lodash';
+import {ReleaseBuilderService} from "../../services/release-builder.service";
+import {UtilsService} from "../../services/utils.service";
+import {ReleaseDialogComponent} from "../../release-dialog/release-dialog.component";
 
 @Component({
   selector: 'app-index',
@@ -23,7 +24,7 @@ export class IndexComponent implements OnInit {
   issueId: string;
 
   constructor(private title: Title, private coreSerivce: CoreService, public sanitizer: DomSanitizer,
-              public dialog: MdDialog, private config: ConfigService) {
+              public utils: UtilsService, private config: ConfigService, public builder: ReleaseBuilderService) {
     this.baserUrl = 'ci01.dolphin.lexisnexisrisk.com/cgi-bin/checkprofile.py';
     this.isDbChange = false;
     this.isConfigChange = false;
@@ -82,17 +83,9 @@ export class IndexComponent implements OnInit {
   }
 
   openDialog() {
-    const config: MdDialogConfig = new MdDialogConfig();
-    config.width = '1000px';
-    const dialogRef = this.dialog.open(ReleaseDialogComponent, config);
-    dialogRef.componentInstance.data = {
-      sprint: this.sprint,
-      runProfiles: this.runProfiles,
-      issues: this.issues,
-      repos: this.repos,
-      isDbChange: this.isDbChange,
-      isConfigChange: this.isConfigChange
-    };
+    const generatedContent = this.builder.build(this.sprint, this.runProfiles, this.issues, this.repos,
+      this.isDbChange, this.isConfigChange);
+    this.utils.openDialog({content: generatedContent, title: 'Profile Release'}, ReleaseDialogComponent);
   }
 
   private highLightIssue(issue) {

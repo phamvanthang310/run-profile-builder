@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {CoreService} from '../services/core.service';
-import {ConfigService} from "../services/config.service";
+import {CoreService} from '../../services/core.service';
+import {ConfigService} from "../../services/config.service";
 import {MdSnackBar} from '@angular/material';
 
 @Component({

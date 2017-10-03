@@ -1,6 +1,6 @@
 <div md-dialog-title style="display: flex">
   <span style="line-height: 40px">
-    Release Profiles
+    {{data.title}}
   </span>
   <div style="flex-grow: 1"></div>
   <a md-icon-button mdTooltip="Copy to clipboard" [mdTooltipPosition]="'left'">
@@ -8,7 +8,7 @@
   </a>
 </div>
 <md-dialog-content>
-  <div class="release-content" [innerHTML]="sanitizer.bypassSecurityTrustHtml(releaseContent)"></div>
+  <div class="release-content" [innerHTML]="sanitizer.bypassSecurityTrustHtml(data.content)"></div>
 </md-dialog-content>
 <md-dialog-actions ngClass="flex flex-row-reverse">
   <button md-raised-button md-dialog-close color="accent">Close</button>
