@@ -18,6 +18,11 @@
           </a>
         </div>
         <div class="item">
+          <form #issueForm="ngForm" novalidate (submit)="(pushCustomIssue(issueForm))">
+            <md-input-container [hintLabel]="'Add custom issue.'" ngClass="full-width medium-font">
+              <input mdInput placeholder="Issue Summary" ngModel name="summary">
+            </md-input-container>
+          </form>
           <app-draggable-issue-list [(issues)]="issues"></app-draggable-issue-list>
         </div>
         <div class="item">

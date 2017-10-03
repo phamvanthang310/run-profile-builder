@@ -6,7 +6,7 @@ export class QaDailyReportBuilderService {
   constructor() {
   }
 
-  public build(issues: Array<any>, doneIssues: Array<any>, inprogressIssues: Array<any>): string {
+  public build(doneIssues: Array<any>, inprogressIssues: Array<any>): string {
     return `
       <div style="margin: 5px 0">Below is Dolphin Report for today.</div>
       <span style="color: rgb(31,73,125); font-size: 15px; font-style: italic">
@@ -21,7 +21,9 @@ export class QaDailyReportBuilderService {
   }
 
   private buildIssues(issues: Array<any>): string {
-    return issues.map(issue => `<li><a href="${issue.href}">${issue.key}:</a> ${issue.fields.summary}</li>`).join('');
+    return issues.map(issue =>
+      `<li>${issue.key ? `<a href="${issue.href}">${issue.key}:</a>` : '' } ${issue.fields.summary}</li>`)
+      .join('');
   }
 
 }

@@ -9,10 +9,10 @@
           <tr>
             <td>
               <md-input-container class="full-width">
-                <input mdInput required placeholder="Checking profile url" #checkProfileUrlInput="ngModel"
-                       name="checkProfileUrlInput" [(ngModel)]="checkProfileUrl" disabled>
-                <md-error *ngIf="checkProfileUrlInput.touched && checkProfileUrlInput.invalid">
-                  Checking profile url is <strong>required</strong>
+                <input mdInput required placeholder="Sprint" #sprintInput="ngModel" [(ngModel)]="sprint"
+                       name="sprintInput">
+                <md-error *ngIf="sprintInput.touched && sprintInput.invalid">
+                  Sprint is <strong>required</strong>
                 </md-error>
               </md-input-container>
             </td>
@@ -20,10 +20,10 @@
           <tr>
             <td>
               <md-input-container class="full-width">
-                <input mdInput required placeholder="Sprint" #sprintInput="ngModel" [(ngModel)]="sprint"
-                       name="sprintInput">
-                <md-error *ngIf="sprintInput.touched && sprintInput.invalid">
-                  Sprint is <strong>required</strong>
+                <input mdInput required placeholder="Checking profile url" #checkProfileUrlInput="ngModel"
+                       name="checkProfileUrlInput" [(ngModel)]="checkProfileUrl" disabled>
+                <md-error *ngIf="checkProfileUrlInput.touched && checkProfileUrlInput.invalid">
+                  Checking profile url is <strong>required</strong>
                 </md-error>
               </md-input-container>
             </td>
@@ -47,14 +47,14 @@
     </md-card-content>
   </md-card>
   <!--Custom settings-->
-  <md-card>
-    <md-card-title>Custom Settings</md-card-title>
-    <md-card-subtitle></md-card-subtitle>
-    <md-card-content>
-      <md-tab-group>
-        <md-tab label="Dolphin">Not available</md-tab>
-        <md-tab label="Honey Badger">Not available</md-tab>
-      </md-tab-group>
-    </md-card-content>
-  </md-card>
+  <!--<md-card>-->
+  <!--<md-card-title>Custom Settings</md-card-title>-->
+  <!--<md-card-subtitle></md-card-subtitle>-->
+  <!--<md-card-content>-->
+  <!--<md-tab-group>-->
+  <!--<md-tab label="Dolphin">Not available</md-tab>-->
+  <!--<md-tab label="Honey Badger">Not available</md-tab>-->
+  <!--</md-tab-group>-->
+  <!--</md-card-content>-->
+  <!--</md-card>-->
 </app-component-viewer>

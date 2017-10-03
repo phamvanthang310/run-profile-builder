@@ -1,7 +1,7 @@
 <md-list *ngIf="issues">
   <div [dragula]="'issues'" [ngClass]="'draggable'" [dragulaModel]="issues">
     <md-list-item *ngFor="let story of issues" [ngClass]="story.style" [attr.id]="story.key">
-      <p md-line ngClass="title"><a [href]="story.href" target="_blank">{{story.key}}:</a>
+      <p md-line ngClass="title"><a [href]="story.href" target="_blank" *ngIf="story.key">{{story.key}}:</a>
         {{story.fields.summary}}
       </p>
     </md-list-item>
