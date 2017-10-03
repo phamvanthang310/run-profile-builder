@@ -2,5 +2,27 @@
   <h3 class="name">{{componentName}}</h3>
 </div>
 <div class="component-container">
-  <ng-content></ng-content>
+  <div class="main-content">
+    <ng-content></ng-content>
+  </div>
+  <div class="table-content" *ngIf="tableContent">
+    <div class="docs-toc-container">
+      <div class="docs-toc-heading">Contents</div>
+      <nav>
+        <a href="/home#jira" class="hash-link">
+          Jira Issues
+        </a>
+        <a href="/home#repo" class="hash-link">
+          Repo Changes
+        </a>
+        <a href="/home#db-change" class="hash-link">
+          Is Db Changes
+        </a>
+        <a href="/home#config-change" class="hash-link">
+          Is Config Changes
+        </a>
+      </nav>
+    </div>
+  </div>
 </div>
+

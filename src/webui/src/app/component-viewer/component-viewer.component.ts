@@ -8,8 +8,10 @@ import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 })
 export class ComponentViewerComponent implements OnInit {
   @Input() componentName;
+  @Input() tableContent: any = null;
 
   constructor() {
+    this.tableContent = {};
   }
 
   ngOnInit() {

@@ -15,4 +15,32 @@
 .component-container {
   margin: auto;
   max-width: 1250px;
+  display: flex;
+
+  > * {
+    box-sizing: border-box;
+    padding: 5px;
+  }
+
+  .main-content {
+    width: 80%;
+  }
+
+  .table-content {
+    width: 20%;
+    position: sticky;
+  }
+}
+
+a.hash-link {
+  line-height: 16px;
+  margin: 8px 0 0;
+  position: relative;
+  text-decoration: none;
+  display: block;
+}
+
+.docs-toc-container {
+  padding: 5px 0 10px 12px;
+  border-left: 4px solid #3f51b5
 }
