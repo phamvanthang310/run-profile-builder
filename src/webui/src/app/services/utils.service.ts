@@ -38,7 +38,7 @@ export class UtilsService {
     this.dialog.open(dialogComponent, config);
   }
 
-  public getInstanceDate(): string {
+  public getInstantDate(): string {
     return new Date().toLocaleString('en-US', {year: 'numeric', month: 'numeric', day: 'numeric'});
   }
 }

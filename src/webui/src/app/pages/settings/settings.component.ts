@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {CoreService} from '../../services/core.service';
 import {ConfigService} from "../../services/config.service";
 import {MdSnackBar} from '@angular/material';
+import {LocalStorageService} from "../../services/local-storage.service";
+import {QaDailyReportComponent} from "../qa-daily-report/qa-daily-report.component";
 
 @Component({
   selector: 'app-settings',
@@ -15,8 +16,8 @@ export class SettingsComponent implements OnInit {
   sprint: string;
   jiraDomain: string;
 
-  constructor(private title: Title, private coreService: CoreService, private configService: ConfigService,
-              private snackBar: MdSnackBar) {
+  constructor(public title: Title, public configService: ConfigService,
+              public snackBar: MdSnackBar, public localStorage: LocalStorageService) {
     this.checkProfileUrl = 'ci01.dolphin.lexisnexisrisk.com/cgi-bin/checkprofile.py';
     this.jiraDomain = 'https://jira.rsi.lexisnexis.com';
   }
@@ -28,6 +29,11 @@ export class SettingsComponent implements OnInit {
 
   applyChanges() {
     this.configService.setSprint(this.sprint);
+
+    //Empty temp data
+    this.localStorage.set(QaDailyReportComponent.DONE_ISSUES_KEY, null);
+    this.localStorage.set(QaDailyReportComponent.IN_PROGRESS_ISSUES_KEY, null);
+
     this.snackBar.open('Change is applied sucessfully!', null, {
       duration: 1500,
       extraClasses: ['snack-bar', 'success']

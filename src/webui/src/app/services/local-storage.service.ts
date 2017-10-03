@@ -7,16 +7,15 @@ export class LocalStorageService {
   }
 
   get(key: string): any {
-    return localStorage.getItem(key);
+    return JSON.parse(localStorage.getItem(key));
   }
 
   set(key: string, data: any): void {
-    localStorage.setItem(key, data);
+    localStorage.setItem(key, JSON.stringify(data));
   }
 
   remove(key: string): boolean {
     localStorage.removeItem(key);
     return this.get(key).isEmpty();
   }
-
 }

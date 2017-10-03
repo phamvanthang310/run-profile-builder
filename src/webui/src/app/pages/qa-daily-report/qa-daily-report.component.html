@@ -11,14 +11,24 @@
     <md-card-content>
       <div class="row" *ngIf="issues; else loadding">
         <h1 class="item item_header">Available Issues</h1>
-        <h1 class="item item_header">Work Done/Completed</h1>
+        <div class="item item_header">
+          <span>Work Done/Completed</span>
+          <a md-icon-button mdTooltip="Clear all" [mdTooltipPosition]="'right'" (click)="clearIssues(doneIssues)">
+            <md-icon ngClass="clickable">clear_all</md-icon>
+          </a>
+        </div>
         <div class="item">
           <app-draggable-issue-list [(issues)]="issues"></app-draggable-issue-list>
         </div>
         <div class="item">
           <app-draggable-issue-list [(issues)]="doneIssues"></app-draggable-issue-list>
-
-          <h1 class="item_header">In Progress & Planning</h1>
+          <div class="item item_header">
+            <span>In Progress & Planning</span>
+            <a md-icon-button mdTooltip="Clear all" [mdTooltipPosition]="'right'"
+               (click)="clearIssues(inProgressIssues)">
+              <md-icon ngClass="clickable">clear_all</md-icon>
+            </a>
+          </div>
           <app-draggable-issue-list [(issues)]="inProgressIssues"></app-draggable-issue-list>
         </div>
       </div>
