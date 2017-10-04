@@ -14,6 +14,21 @@ import {ReleaseDialogComponent} from "../../release-dialog/release-dialog.compon
 })
 export class IndexComponent implements OnInit {
   readonly TITLE = 'Generate Release Email';
+  readonly TABLE_OF_CONTENT = [
+    {
+      name: 'Jira Issues',
+      link: '/home#jira'
+    }, {
+      name: 'Repo changes',
+      link: '/home#repo'
+    }, {
+      name: 'Is Database Changes?',
+      link: '/home#db-change'
+    }, {
+      name: 'Is Config Changes',
+      link: '/home#config-change'
+    }
+  ];
   baserUrl: string;
   sprint: string;
   runProfiles: string;

@@ -24,23 +24,49 @@
 
   .main-content {
     width: 80%;
-  }
 
-  .table-content {
-    width: 20%;
-    position: sticky;
+    &:only-child {
+      width: 100%;
+    }
   }
 }
 
-a.hash-link {
-  line-height: 16px;
-  margin: 8px 0 0;
-  position: relative;
-  text-decoration: none;
-  display: block;
-}
+.table-content {
+  height: 100%;
+  width: 20%;
+  float: left;
+  position: sticky;
+  top: 75px;
+  font-size: 15px;
 
-.docs-toc-container {
-  padding: 5px 0 10px 12px;
-  border-left: 4px solid #3f51b5
+  a.hash-link {
+    line-height: 16px;
+    margin: 8px 0 0;
+    position: relative;
+    text-decoration: none;
+    display: block;
+    color: rgba(0, 0, 0, .54);
+
+    &:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+
+  .container {
+    padding: 5px 0 10px 12px;
+    border-left: 4px solid #1e88e5;
+
+    .heading {
+      font-weight: bold;
+    }
+
+    .lv-1 {
+      padding-left: 8px;
+    }
+
+    .active {
+      color: #ffab40;
+    }
+  }
 }

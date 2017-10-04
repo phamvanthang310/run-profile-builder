@@ -6,20 +6,11 @@
     <ng-content></ng-content>
   </div>
   <div class="table-content" *ngIf="tableContent">
-    <div class="docs-toc-container">
-      <div class="docs-toc-heading">Contents</div>
+    <div class="container">
+      <div class="heading">Contents</div>
       <nav>
-        <a href="/home#jira" class="hash-link">
-          Jira Issues
-        </a>
-        <a href="/home#repo" class="hash-link">
-          Repo Changes
-        </a>
-        <a href="/home#db-change" class="hash-link">
-          Is Db Changes
-        </a>
-        <a href="/home#config-change" class="hash-link">
-          Is Config Changes
+        <a [href]="item.link" class="hash-link lv-1" *ngFor="let item of tableContent" [class.active]="item.isActive">
+          {{item.name}}
         </a>
       </nav>
     </div>
