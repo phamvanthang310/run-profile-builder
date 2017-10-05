@@ -1,11 +1,11 @@
 package com.thangpham.tool.models;
 
-import java.io.Serializable;
-import java.util.List;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by tpham.
@@ -20,7 +20,7 @@ public class Jira implements Serializable {
 
     @Getter
     @Setter
-    public static class Issue {
+    public static class Issue implements Serializable {
         private String key;
         private Fields fields;
         private String href; // Custom fields
@@ -28,14 +28,14 @@ public class Jira implements Serializable {
 
     @Getter
     @Setter
-    public static class Fields {
+    public static class Fields implements Serializable {
         private Issuetype issuetype;
         private String summary;
     }
 
     @Getter
     @Setter
-    public static class Issuetype {
+    public static class Issuetype implements Serializable {
         private String name;
         private boolean subtask;
     }

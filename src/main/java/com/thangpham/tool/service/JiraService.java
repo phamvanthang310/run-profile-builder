@@ -1,22 +1,23 @@
 package com.thangpham.tool.service;
 
-import com.thangpham.tool.configs.JiraProperties;
-import com.thangpham.tool.models.Jira;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import com.thangpham.tool.configs.JiraProperties;
+import com.thangpham.tool.models.Jira;
 
 /**
  * Created by tpham.
@@ -34,6 +35,7 @@ public class JiraService extends AbstractGateway implements IJiraService {
     }
 
     @Override
+    @Cacheable("issues")
     public List<Jira.Issue> fetchJiraStory(String sprint) {
         String url = jiraProperties.getDomain() + jiraProperties.getFetchStoryUrl();
         Map<String, String> requestParams = new HashMap<>();
@@ -44,6 +46,7 @@ public class JiraService extends AbstractGateway implements IJiraService {
     }
 
     @Override
+    @Cacheable(cacheNames = "issue", key = "#id")
     public List<Jira.Issue> getIssueById(String id) {
         String url = jiraProperties.getDomain() + jiraProperties.getGetByIdUrl();
         Map<String, String> requestParams = new HashMap<>();

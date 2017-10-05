@@ -1,10 +1,10 @@
 package com.thangpham.tool.models;
 
-import java.io.Serializable;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.io.Serializable;
 
 /**
  * Created by tpham.
@@ -22,31 +22,31 @@ public class Pull implements Serializable {
 
     @Getter
     @Setter
-    public static class User {
+    public static class User implements Serializable {
         private String login;
     }
 
     @Getter
     @Setter
-    public static class Link {
+    public static class Link implements Serializable {
         private Html html;
     }
 
     @Getter
     @Setter
-    public static class Html {
+    public static class Html implements Serializable {
         private String href;
     }
 
     @Getter
     @Setter
-    public static class Head {
+    public static class Head implements Serializable {
         private Repo repo;
     }
 
     @Getter
     @Setter
-    public static class Repo {
+    public static class Repo implements Serializable {
         private String name;
     }
 }

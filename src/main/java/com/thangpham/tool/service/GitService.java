@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -37,6 +38,7 @@ public class GitService extends AbstractGateway implements IGitService {
     }
 
     @Override
+    @Cacheable(cacheNames = "pull-request", key = "#repoName")
     public List<Pull> getPullRequest(String repoName) {
         String url = gitProperties.getDomain() + String.format(gitProperties.getFetchPullRequestUrl(), repoName);
         LOGGER.debug("Fetch Pull Request: [{}] : [{}]", repoName, url);
@@ -57,6 +59,7 @@ public class GitService extends AbstractGateway implements IGitService {
     }
 
     @Override
+    @Cacheable("repos")
     public List<Repo> getAllRepo() {
         return gitProperties.getRepos().stream().map(repoName -> {
             Repo repo = new Repo();

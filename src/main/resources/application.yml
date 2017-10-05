@@ -1,6 +1,11 @@
 server:
   port: 9000
 
+cache:
+  enable: true
+  expire-time-after-write: 5 #minutes
+  maximum-size: 100 #the maximum number of entries the cache may contain
+
 jira:
   domain: https://jira.rsi.lexisnexis.com
   fetch-story-url: /rest/api/2/search?jql=project = MAS AND issuetype in (Bug, Story, "Bug Sub-Task", Debt) AND Sprint = "{sprint}"
