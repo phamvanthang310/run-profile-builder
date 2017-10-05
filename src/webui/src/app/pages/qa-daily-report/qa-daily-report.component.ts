@@ -89,6 +89,7 @@ export class QaDailyReportComponent implements OnInit, OnDestroy {
         summary: form.value.summary
       }
     });
+    form.resetForm();
   }
 
   private fetchIssues() {
