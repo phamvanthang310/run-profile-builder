@@ -39,7 +39,6 @@ export class QaDailyReportComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.fetchIssues();
     this.dragulaObser = this.dragulaService.drop.subscribe(value => {
-      console.log(value);
       this.persistIssues();
     });
   }
