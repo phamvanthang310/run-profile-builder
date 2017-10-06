@@ -19,11 +19,11 @@ body, h1, h2, h3, h4, h5 {
   margin: 0;
 }
 
-md-card {
+mat-card {
   margin-bottom: 15px;
 }
 
-md-list-item {
+mat-list-item {
   .title {
     font-size: 18px
   }
@@ -34,7 +34,7 @@ md-list-item {
   }
 }
 
-md-card-title {
+mat-card-title {
   .title {
     line-height: 40px
   }
@@ -80,7 +80,7 @@ md-card-title {
   font-size: medium;
 }
 
-md-progress-spinner.loader {
+mat-progress-spinner.loader {
   height: 50px;
   width: 50px;
   margin: auto;

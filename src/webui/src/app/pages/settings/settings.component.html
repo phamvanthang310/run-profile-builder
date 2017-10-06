@@ -1,60 +1,60 @@
 <app-component-viewer [componentName]="TITLE">
   <!--Core settings-->
-  <md-card>
-    <md-card-title>Core Settings</md-card-title>
-    <md-card-subtitle></md-card-subtitle>
-    <md-card-content>
+  <mat-card>
+    <mat-card-title>Core Settings</mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+    <mat-card-content>
       <form class="medium-font" #commonSettings="ngForm" novalidate (submit)="applyChanges()">
         <table class="full-width" cellspacing="1">
           <tr>
             <td>
-              <md-input-container class="full-width">
-                <input mdInput required placeholder="Sprint" #sprintInput="ngModel" [(ngModel)]="sprint"
+              <mat-form-field class="full-width">
+                <input matInput required placeholder="Sprint" #sprintInput="ngModel" [(ngModel)]="sprint"
                        name="sprintInput">
-                <md-error *ngIf="sprintInput.touched && sprintInput.invalid">
+                <mat-error *ngIf="sprintInput.touched && sprintInput.invalid">
                   Sprint is <strong>required</strong>
-                </md-error>
-              </md-input-container>
+                </mat-error>
+              </mat-form-field>
             </td>
           </tr>
           <tr>
             <td>
-              <md-input-container class="full-width">
-                <input mdInput required placeholder="Checking profile url" #checkProfileUrlInput="ngModel"
+              <mat-form-field class="full-width">
+                <input matInput required placeholder="Checking profile url" #checkProfileUrlInput="ngModel"
                        name="checkProfileUrlInput" [(ngModel)]="checkProfileUrl" disabled>
-                <md-error *ngIf="checkProfileUrlInput.touched && checkProfileUrlInput.invalid">
+                <mat-error *ngIf="checkProfileUrlInput.touched && checkProfileUrlInput.invalid">
                   Checking profile url is <strong>required</strong>
-                </md-error>
-              </md-input-container>
+                </mat-error>
+              </mat-form-field>
             </td>
           </tr>
           <tr>
             <td>
-              <md-input-container class="full-width">
-                <input mdInput required placeholder="Jira domain" #jiraDomainInput="ngModel" [(ngModel)]="jiraDomain"
+              <mat-form-field class="full-width">
+                <input matInput required placeholder="Jira domain" #jiraDomainInput="ngModel" [(ngModel)]="jiraDomain"
                        name="jiraDomainInput" disabled>
-                <md-error *ngIf="jiraDomainInput.touched && jiraDomainInput.invalid">
+                <mat-error *ngIf="jiraDomainInput.touched && jiraDomainInput.invalid">
                   Jira domain is <strong>required</strong>
-                </md-error>
-              </md-input-container>
+                </mat-error>
+              </mat-form-field>
             </td>
           </tr>
-          <button md-raised-button color="primary" [disabled]="commonSettings.form.invalid || !commonSettings.dirty">
+          <button mat-raised-button color="primary" [disabled]="commonSettings.form.invalid || !commonSettings.dirty">
             APPLY
           </button>
         </table>
       </form>
-    </md-card-content>
-  </md-card>
+    </mat-card-content>
+  </mat-card>
   <!--Custom settings-->
-  <!--<md-card>-->
-  <!--<md-card-title>Custom Settings</md-card-title>-->
-  <!--<md-card-subtitle></md-card-subtitle>-->
-  <!--<md-card-content>-->
-  <!--<md-tab-group>-->
-  <!--<md-tab label="Dolphin">Not available</md-tab>-->
-  <!--<md-tab label="Honey Badger">Not available</md-tab>-->
-  <!--</md-tab-group>-->
-  <!--</md-card-content>-->
-  <!--</md-card>-->
+  <!--<mat-card>-->
+  <!--<mat-card-title>Custom Settings</mat-card-title>-->
+  <!--<mat-card-subtitle></mat-card-subtitle>-->
+  <!--<mat-card-content>-->
+  <!--<mat-tab-group>-->
+  <!--<mat-tab label="Dolphin">Not available</mat-tab>-->
+  <!--<mat-tab label="Honey Badger">Not available</mat-tab>-->
+  <!--</mat-tab-group>-->
+  <!--</mat-card-content>-->
+  <!--</mat-card>-->
 </app-component-viewer>

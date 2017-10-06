@@ -1,27 +1,27 @@
 <app-component-viewer [componentName]="TITLE">
-  <md-card>
-    <md-card-title>
+  <mat-card>
+    <mat-card-title>
       <div class="flex">
         <span class="title">{{sprint}} Issues</span>
-        <a md-icon-button mdTooltip="Refresh" [mdTooltipPosition]="'right'" (click)="refresh()">
-          <md-icon ngClass="clickable">refresh</md-icon>
+        <a mat-icon-button matTooltip="Refresh" [matTooltipPosition]="'right'" (click)="refresh()">
+          <mat-icon ngClass="clickable">refresh</mat-icon>
         </a>
       </div>
-    </md-card-title>
-    <md-card-content>
+    </mat-card-title>
+    <mat-card-content>
       <div class="row" *ngIf="issues; else loadding">
         <h1 class="item item_header">Available Issues</h1>
         <div class="item item_header">
           <span>Work Done/Completed</span>
-          <a md-icon-button mdTooltip="Clear all" [mdTooltipPosition]="'right'" (click)="clearIssues(doneIssues)">
-            <md-icon ngClass="clickable">clear_all</md-icon>
+          <a mat-icon-button matTooltip="Clear all" [matTooltipPosition]="'right'" (click)="clearIssues(doneIssues)">
+            <mat-icon ngClass="clickable">clear_all</mat-icon>
           </a>
         </div>
         <div class="item">
           <form #issueForm="ngForm" novalidate (submit)="(pushCustomIssue(issueForm))">
-            <md-input-container [hintLabel]="'Add custom issue.'" ngClass="full-width medium-font">
-              <input mdInput placeholder="Issue Summary" ngModel name="summary">
-            </md-input-container>
+            <mat-form-field [hintLabel]="'Add custom issue.'" ngClass="full-width medium-font">
+              <input matInput placeholder="Issue Summary" ngModel name="summary">
+            </mat-form-field>
           </form>
           <app-draggable-issue-list [(issues)]="issues"></app-draggable-issue-list>
         </div>
@@ -29,9 +29,9 @@
           <app-draggable-issue-list [(issues)]="doneIssues"></app-draggable-issue-list>
           <div class="item item_header">
             <span>In Progress & Planning</span>
-            <a md-icon-button mdTooltip="Clear all" [mdTooltipPosition]="'right'"
+            <a mat-icon-button matTooltip="Clear all" [matTooltipPosition]="'right'"
                (click)="clearIssues(inProgressIssues)">
-              <md-icon ngClass="clickable">clear_all</md-icon>
+              <mat-icon ngClass="clickable">clear_all</mat-icon>
             </a>
           </div>
           <app-draggable-issue-list [(issues)]="inProgressIssues"></app-draggable-issue-list>
@@ -39,16 +39,16 @@
       </div>
 
       <ng-template #loadding>
-        <md-progress-spinner *ngIf="!issues" [mode]="'indeterminate'" color="accent" [strokeWidth]="7"
-                             ngClass="loader">
-        </md-progress-spinner>
+        <mat-progress-spinner *ngIf="!issues" [mode]="'indeterminate'" color="accent" [strokeWidth]="7"
+                              ngClass="loader">
+        </mat-progress-spinner>
       </ng-template>
-    </md-card-content>
-  </md-card>
+    </mat-card-content>
+  </mat-card>
   <!--Action button-->
   <div class="floating">
-    <button md-fab mdTooltip="Generate" [mdTooltipPosition]="'left'" (click)="openDialog()">
-      <md-icon aria-hidden>unarchive</md-icon>
+    <button mat-fab matTooltip="Generate" [matTooltipPosition]="'left'" (click)="openDialog()">
+      <mat-icon aria-hidden>unarchive</mat-icon>
     </button>
   </div>
 </app-component-viewer>

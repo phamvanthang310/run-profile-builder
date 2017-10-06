@@ -1,15 +1,15 @@
-<div md-dialog-title style="display: flex">
+<div matDialogTitle style="display: flex">
   <span style="line-height: 40px">
     {{data.title}}
   </span>
   <div style="flex-grow: 1"></div>
-  <a md-icon-button mdTooltip="Copy to clipboard" [mdTooltipPosition]="'left'">
-    <md-icon class="clickable" (click)="copyToClipboard()">content_copy</md-icon>
+  <a mat-icon-button matTooltip="Copy to clipboard" [matTooltipPosition]="'left'">
+    <mat-icon class="clickable" (click)="copyToClipboard()">content_copy</mat-icon>
   </a>
 </div>
-<md-dialog-content>
+<mat-dialog-content>
   <div class="release-content" [innerHTML]="sanitizer.bypassSecurityTrustHtml(data.content)"></div>
-</md-dialog-content>
-<md-dialog-actions ngClass="flex flex-row-reverse">
-  <button md-raised-button md-dialog-close color="accent">Close</button>
-</md-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions ngClass="flex flex-row-reverse">
+  <button mat-raised-button matDialogClose color="accent">Close</button>
+</mat-dialog-actions>

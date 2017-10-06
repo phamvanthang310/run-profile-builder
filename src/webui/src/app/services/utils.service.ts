@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {MdDialog, MdDialogConfig, MdSnackBar, MdSnackBarConfig} from "@angular/material";
+import {MatDialog, MatDialogConfig, MatSnackBar, MatSnackBarConfig} from "@angular/material";
 import {ComponentType} from "@angular/cdk/portal";
 
 @Injectable()
 export class UtilsService {
 
-  constructor(public snackBar: MdSnackBar, public dialog: MdDialog) {
+  constructor(public snackBar: MatSnackBar, public dialog: MatDialog) {
   }
 
   public copyToClipboard(selector: string): void {
@@ -19,19 +19,19 @@ export class UtilsService {
     document.execCommand('copy');
     selection.removeAllRanges();
 
-    const snackBarConfig = new MdSnackBarConfig();
+    const snackBarConfig = new MatSnackBarConfig();
     snackBarConfig.extraClasses = ['snack-bar', 'success'];
     snackBarConfig.duration = 1500;
 
     this.displaySnackBarWithoutAction('Copied to clipboard!', snackBarConfig);
   }
 
-  public displaySnackBarWithoutAction(message: string, config: MdSnackBarConfig = {}) {
+  public displaySnackBarWithoutAction(message: string, config: MatSnackBarConfig = {}) {
     this.snackBar.open(message, null, config);
   }
 
   public openDialog(data: any, dialogComponent: ComponentType<any>) {
-    let config: MdDialogConfig = new MdDialogConfig();
+    let config: MatDialogConfig = new MatDialogConfig();
     config.width = '1000px';
     config.data = data;
 

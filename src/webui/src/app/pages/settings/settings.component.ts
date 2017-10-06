@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ConfigService} from "../../services/config.service";
-import {MdSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 import {LocalStorageService} from "../../services/local-storage.service";
 import {QaDailyReportComponent} from "../qa-daily-report/qa-daily-report.component";
 
@@ -17,7 +17,7 @@ export class SettingsComponent implements OnInit {
   jiraDomain: string;
 
   constructor(public title: Title, public configService: ConfigService,
-              public snackBar: MdSnackBar, public localStorage: LocalStorageService) {
+              public snackBar: MatSnackBar, public localStorage: LocalStorageService) {
     this.checkProfileUrl = 'ci01.dolphin.lexisnexisrisk.com/cgi-bin/checkprofile.py';
     this.jiraDomain = 'https://jira.rsi.lexisnexis.com';
   }

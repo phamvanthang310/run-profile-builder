@@ -1,11 +1,11 @@
-<md-toolbar color="primary" ngClass="box-shadow fixed">
-  <a md-button routerLink="/home" routerLinkActive="active"><span>RUN-PROFILE RELEASE</span></a>
-  <a md-button routerLink="/qa-daily-report" routerLinkActive="active"><span>QA DAILY REPORT</span></a>
-  <a md-button routerLink="/pulls" routerLinkActive="active"><span>PULL REQUESTS</span></a>
+<mat-toolbar color="primary" ngClass="box-shadow fixed">
+  <a mat-button routerLink="/home" routerLinkActive="active"><span>RUN-PROFILE RELEASE</span></a>
+  <a mat-button routerLink="/qa-daily-report" routerLinkActive="active"><span>QA DAILY REPORT</span></a>
+  <a mat-button routerLink="/pulls" routerLinkActive="active"><span>PULL REQUESTS</span></a>
   <span class="example-spacer"></span>
-  <a md-icon-button routerLink="/settings" mdTooltip="Settings" [mdTooltipPosition]="'below'">
-    <md-icon class="example-icon">settings</md-icon>
+  <a mat-icon-button routerLink="/settings" matTooltip="Settings" [matTooltipPosition]="'below'">
+    <mat-icon class="example-icon">settings</mat-icon>
   </a>
-</md-toolbar>
+</mat-toolbar>
 <router-outlet></router-outlet>
 <footer></footer>

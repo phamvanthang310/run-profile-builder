@@ -1,102 +1,103 @@
 <app-component-viewer [componentName]="TITLE" [tableContent]="TABLE_OF_CONTENT">
   <!--Run-profiles-->
-  <md-card id="run-profile">
-    <md-card-title>
+  <mat-card id="run-profile">
+    <mat-card-title>
       <div class="flex">
         <span class="title">
           Runprofiles
         </span>
         <!--<div style="flex-grow: 1"></div>-->
-        <a md-icon-button (click)="checkoutProfile()" mdTooltip="Refresh" [mdTooltipPosition]="'right'">
-          <md-icon ngClass="clickable">refresh</md-icon>
+        <a mat-icon-button (click)="checkoutProfile()" matTooltip="Refresh" [matTooltipPosition]="'right'">
+          <mat-icon ngClass="clickable">refresh</mat-icon>
         </a>
       </div>
-    </md-card-title>
-    <md-card-subtitle>{{baserUrl}}</md-card-subtitle>
-    <md-card-content>
+    </mat-card-title>
+    <mat-card-subtitle>{{baserUrl}}</mat-card-subtitle>
+    <mat-card-content>
       <ng-template #runprofileLoader>
-        <md-progress-spinner [mode]="'indeterminate'" color="accent" [strokeWidth]="7" ngClass="loader">
-        </md-progress-spinner>
+        <mat-progress-spinner [mode]="'indeterminate'" color="accent" [strokeWidth]="7" ngClass="loader">
+        </mat-progress-spinner>
       </ng-template>
       <div class="profile-details" [innerHTML]="sanitizer.bypassSecurityTrustHtml(runProfiles)" *ngIf="runProfiles; else runprofileLoader">
       </div>
-    </md-card-content>
-  </md-card>
+    </mat-card-content>
+  </mat-card>
   <!--Jira issues-->
-  <md-card id="jira">
-    <md-card-title>
+  <mat-card id="jira">
+    <mat-card-title>
       <div class="flex">
         <span class="title">
           Jira stories
         </span>
         <!--<div style="flex-grow: 1"></div>-->
-        <a md-icon-button (click)="fetchJiraStory()" mdTooltip="Refresh" [mdTooltipPosition]="'right'">
-          <md-icon ngClass="clickable">refresh</md-icon>
+        <a mat-icon-button (click)="fetchJiraStory()" matTooltip="Refresh" [matTooltipPosition]="'right'">
+          <mat-icon ngClass="clickable">refresh</mat-icon>
         </a>
       </div>
-    </md-card-title>
-    <md-card-subtitle>{{sprint}}</md-card-subtitle>
-    <md-card-content>
+    </mat-card-title>
+    <mat-card-subtitle>{{sprint}}</mat-card-subtitle>
+    <mat-card-content>
       <form #jiraForm="ngForm" novalidate (submit)="getJiraIssue($event)">
-        <md-input-container [hintLabel]="'Get new Jira Issue by ID (lowcase is acceptable).'" ngClass="full-width medium-font">
-          <input mdInput placeholder="Issue ID" value="" [(ngModel)]="issueId" name="issueId">
-        </md-input-container>
+        <mat-form-field [hintLabel]="'Get new Jira Issue by ID (lowcase is acceptable).'"
+                        ngClass="full-width medium-font">
+          <input matInput placeholder="Issue ID" value="" [(ngModel)]="issueId" name="issueId">
+        </mat-form-field>
       </form>
-      <md-progress-spinner *ngIf="!issues" [mode]="'indeterminate'" color="accent" [strokeWidth]="7" ngClass="loader">
-      </md-progress-spinner>
-      <md-list *ngIf="issues">
-        <md-list-item *ngFor="let story of issues" [ngClass]="story.style" [attr.id]="story.key">
-          <md-icon md-list-icon>bookmark_border</md-icon>
-          <p md-line ngClass="title"><a [href]="story.href" target="_blank">{{story.key}}:</a> {{story.fields.summary}}
+      <mat-progress-spinner *ngIf="!issues" [mode]="'indeterminate'" color="accent" [strokeWidth]="7" ngClass="loader">
+      </mat-progress-spinner>
+      <mat-list *ngIf="issues">
+        <mat-list-item *ngFor="let story of issues" [ngClass]="story.style" [attr.id]="story.key">
+          <mat-icon mat-list-icon>bookmark_border</mat-icon>
+          <p matLine ngClass="title"><a [href]="story.href" target="_blank">{{story.key}}:</a> {{story.fields.summary}}
           </p>
-          <p md-line ngClass="sub-title">{{story.fields.issuetype.subtask ? 'Sub Task' : 'Story'}}</p>
-          <md-checkbox [(ngModel)]="story.checked"></md-checkbox>
-        </md-list-item>
-      </md-list>
-    </md-card-content>
-  </md-card>
+          <p matLine ngClass="sub-title">{{story.fields.issuetype.subtask ? 'Sub Task' : 'Story'}}</p>
+          <mat-checkbox [(ngModel)]="story.checked"></mat-checkbox>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
   <!--Repo changes-->
-  <md-card id="repo">
-    <md-card-title>Repo changes</md-card-title>
-    <md-card-content>
-      <md-list *ngIf="repos">
-        <md-list-item *ngFor="let repo of repos">
-          <md-icon md-list-icon class="fa fa-github" aria-hidden></md-icon>
-          <p md-line ngClass="title">{{repo.name}}</p>
-          <p md-line ngClass="sub-title">{{repo.jenkinBuildName}}</p>
-          <md-checkbox [(ngModel)]="repo.checked"></md-checkbox>
-        </md-list-item>
-      </md-list>
-    </md-card-content>
-  </md-card>
+  <mat-card id="repo">
+    <mat-card-title>Repo changes</mat-card-title>
+    <mat-card-content>
+      <mat-list *ngIf="repos">
+        <mat-list-item *ngFor="let repo of repos">
+          <mat-icon mat-list-icon class="fa fa-github" aria-hidden></mat-icon>
+          <p matLine ngClass="title">{{repo.name}}</p>
+          <p matLine ngClass="sub-title">{{repo.jenkinBuildName}}</p>
+          <mat-checkbox [(ngModel)]="repo.checked"></mat-checkbox>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
   <!--Is DB Change-->
-  <md-card id="db-change">
-    <md-card-title>Is Database Changes?</md-card-title>
-    <md-card-content>
+  <mat-card id="db-change">
+    <mat-card-title>Is Database Changes?</mat-card-title>
+    <mat-card-content>
       <form #dbForm="ngForm" novalidate>
-        <md-radio-group [(ngModel)]="isDbChange" name="isDbChange" class="radio-button-group">
-          <md-radio-button class="radio-button" [value]="true">Yes</md-radio-button>
-          <md-radio-button class="radio-button" [value]="false">No</md-radio-button>
-        </md-radio-group>
+        <mat-radio-group [(ngModel)]="isDbChange" name="isDbChange" class="radio-button-group">
+          <mat-radio-button class="radio-button" [value]="true">Yes</mat-radio-button>
+          <mat-radio-button class="radio-button" [value]="false">No</mat-radio-button>
+        </mat-radio-group>
       </form>
-    </md-card-content>
-  </md-card>
+    </mat-card-content>
+  </mat-card>
   <!--Is Config Change-->
-  <md-card id="config-change">
-    <md-card-title>Is Config Changes?</md-card-title>
-    <md-card-content>
+  <mat-card id="config-change">
+    <mat-card-title>Is Config Changes?</mat-card-title>
+    <mat-card-content>
       <form #dbForm="ngForm" novalidate>
-        <md-radio-group [(ngModel)]="isConfigChange" name="isConfigChange" class="radio-button-group">
-          <md-radio-button class="radio-button" [value]="true">Yes</md-radio-button>
-          <md-radio-button class="radio-button" [value]="false">No</md-radio-button>
-        </md-radio-group>
+        <mat-radio-group [(ngModel)]="isConfigChange" name="isConfigChange" class="radio-button-group">
+          <mat-radio-button class="radio-button" [value]="true">Yes</mat-radio-button>
+          <mat-radio-button class="radio-button" [value]="false">No</mat-radio-button>
+        </mat-radio-group>
       </form>
-    </md-card-content>
-  </md-card>
+    </mat-card-content>
+  </mat-card>
   <!--Action button-->
   <div class="floating">
-    <button md-fab mdTooltip="Generate" [mdTooltipPosition]="'left'" (click)="openDialog()">
-      <md-icon aria-hidden>unarchive</md-icon>
+    <button mat-fab matTooltip="Generate" [matTooltipPosition]="'left'" (click)="openDialog()">
+      <mat-icon aria-hidden>unarchive</mat-icon>
     </button>
   </div>
 </app-component-viewer>
