@@ -6,6 +6,7 @@ import _ from 'lodash';
 import {ReleaseBuilderService} from "../../services/release-builder.service";
 import {UtilsService} from "../../services/utils.service";
 import {ReleaseDialogComponent} from "../../release-dialog/release-dialog.component";
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-index',
@@ -58,7 +59,7 @@ export class IndexComponent implements OnInit {
 
   checkoutProfile() {
     this.runProfiles = null;
-    this.coreSerivce.checkoutProfile().subscribe(s => {
+    this.coreSerivce.checkoutProfile().pipe(first()).subscribe(s => {
       this.runProfiles = s.split(/\r\n|\r|\n/g).join('</br>');
     }, error => {
       console.log(error);
@@ -67,14 +68,14 @@ export class IndexComponent implements OnInit {
 
   fetchJiraStory() {
     this.issues = null;
-    this.coreSerivce.fetchJira(this.sprint).subscribe(s => {
+    this.coreSerivce.fetchJira(this.sprint).pipe(first()).subscribe(s => {
       this.issues = s;
     });
   }
 
   fetchAllGitRepos() {
     // Ignore all config repos
-    this.coreSerivce.fetchAllGitRepos()
+    this.coreSerivce.fetchAllGitRepos().pipe(first())
       .subscribe(s => this.repos = s.filter(repo => !_.endsWith(repo.name, 'config')));
   }
 
@@ -86,7 +87,7 @@ export class IndexComponent implements OnInit {
 
     // Request to get new
     if (_.isNil(issue)) {
-      this.coreSerivce.getJiraIssue(this.issueId.toUpperCase()).subscribe(issues => {
+      this.coreSerivce.getJiraIssue(this.issueId.toUpperCase()).pipe(first()).subscribe(issues => {
         if (!_.isEmpty(issues)) {
           const newIssue = issues[0];
           this.issues.unshift(newIssue);

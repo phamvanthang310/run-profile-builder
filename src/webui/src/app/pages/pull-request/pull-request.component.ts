@@ -1,21 +1,20 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CoreService} from '../../services/core.service';
 import {Title} from '@angular/platform-browser';
 import {ConfigService} from '../../services/config.service';
-import {Subscription} from 'rxjs/Subscription';
 import _ from 'lodash';
+import {first} from "rxjs/operators";
 
 @Component({
   selector: 'app-pull-request',
   templateUrl: './pull-request.component.html',
   styleUrls: ['./pull-request.component.scss']
 })
-export class PullRequestComponent implements OnInit, OnDestroy {
+export class PullRequestComponent implements OnInit {
   readonly TITLE = 'Pull requests';
   readonly ALL_REPO = 'all';
   readonly repos: Array<any>;
   pullsGroupByRepo: Array<any>;
-  subscription: Subscription;
 
   constructor(private title: Title, private coreSerivce: CoreService, private config: ConfigService) {
     this.repos = [];
@@ -26,10 +25,6 @@ export class PullRequestComponent implements OnInit, OnDestroy {
     this.fetchPull();
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
   fetchPull(repoName = this.ALL_REPO): void {
     let observable = null;
     if (_.eq(this.ALL_REPO, repoName)) {
@@ -37,7 +32,7 @@ export class PullRequestComponent implements OnInit, OnDestroy {
     } else {
       observable = this.coreSerivce.fetchGitPull(repoName);
     }
-    this.subscription = observable.subscribe(pulls => this.processPulls(pulls));
+    observable.pipe(first()).subscribe(pulls => this.processPulls(pulls));
   }
 
   changeRepo(event) {

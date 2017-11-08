@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import _ from 'lodash';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -13,35 +12,30 @@ export class CoreService {
   private readonly ALL_GIT_PULL_URL = '/api/git';
   private readonly ALL_GIT_REPO = '/api/git/repos';
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   checkoutProfile(): Observable<string> {
-    return this.http.get(this.RUN_PROFILE_URL).map((s: Response) => s.text());
+    return this.http.get(this.RUN_PROFILE_URL, {responseType: 'text'});
   }
 
   fetchJira(sprint: string): Observable<any> {
-    return this.http.get(this.buildUrl(this.JIRA_URL, {sprint: sprint})).map((s: Response) => s.json());
+    return this.http.get(this.JIRA_URL, {responseType: 'json', params: {sprint}});
   }
 
-  getJiraIssue(issueId: string): Observable<any> {
-    return this.http.get(this.buildUrl(this.JIRA_BY_ID_URL, {id: issueId})).map((s: Response) => s.json());
+  getJiraIssue(id: string): Observable<any> {
+    return this.http.get(this.JIRA_BY_ID_URL, {responseType: 'json', params: {id}});
   }
 
   fetchGitPull(repoName: string): Observable<any> {
-    return this.http.get(this.buildUrl(this.GIT_URL, {repoName: repoName})).map((s: Response) => s.json());
+    return this.http.get(this.GIT_URL, {responseType: 'json', params: {repoName}});
   }
 
   fetchAllGitPull(): Observable<any> {
-    return this.http.get(this.ALL_GIT_PULL_URL).map((s: Response) => s.json());
+    return this.http.get(this.ALL_GIT_PULL_URL, {responseType: 'json'});
   }
 
   fetchAllGitRepos(): Observable<any> {
-    return this.http.get(this.ALL_GIT_REPO).map((s: Response) => s.json());
-  }
-
-  private buildUrl(url: string, params: any): string {
-    const complied = _.template(url);
-    return complied(params);
+    return this.http.get(this.ALL_GIT_REPO, {responseType: 'json'});
   }
 }

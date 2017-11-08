@@ -10,7 +10,7 @@ import {AppRoutingModule} from './app.routing.module';
 import {SettingsComponent} from './pages/settings/settings.component';
 import {FormsModule} from '@angular/forms';
 import {CoreService} from './services/core.service';
-import {HttpModule} from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 import {ReleaseDialogComponent} from './release-dialog/release-dialog.component';
 import {ReleaseBuilderService} from './services/release-builder.service';
 import {PullRequestComponent} from './pages/pull-request/pull-request.component';
@@ -35,7 +35,7 @@ import {DraggableIssueListComponent} from "./draggable-issue-list/draggable-issu
     DraggableIssueListComponent
   ],
   imports: [
-    HttpModule,
+    HttpClientModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,
