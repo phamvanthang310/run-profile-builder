@@ -49,11 +49,37 @@ jobs:
           name: build jar
           command: mvn clean install
 
+  build-universal:
+    docker:
+      - image: thangpham310/java8-mvn-nodejs-npm:latest
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v2-dependency-cache-{{ checksum "./src/webui/package.json" }}
+      - run:
+          name: npm install
+          command: cd src/webui && npm install
+
+      - save_cache:
+          paths:
+            - ./src/webui/node_modules
+          key: v2-dependency-cache-{{ checksum "./src/webui/package.json" }}
+
+      - run:
+          name: build universal
+          command: npm run build:ssr
+
 workflows:
   version: 2
   build-and-deploy:
     jobs:
       - build-front-end
+      - build-universal
       - build-jar:
           requires:
             - build-front-end
+            - build-universal
