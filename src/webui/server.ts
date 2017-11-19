@@ -42,12 +42,37 @@ app.get('/api/*', (req, res) => {
 
   // Redirect all request to java server.
   axios({
+    baseURL: SERVER_BASE_URL,
     method: req.method,
-    url: `${SERVER_BASE_URL}${req.originalUrl}`
+    url: req.originalUrl,
+    timeout: 2000 // 2 secs
   }).then(response => {
-    console.log(response.data);
     res.status(response.status).send(response.data);
-  }).catch(error => console.log(error));
+  }).catch(error => {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.log(`ERROR: ${error.message}`);
+      console.log(`Response Data: ${error.response.data}`);
+      console.log(`Response Status: ${error.response.status}`);
+      console.log(`Response Headers: ${error.response.headers}`);
+
+      res.status(error.response.status).send(error.response.data);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(`ERROR: ${error.message}`);
+      console.log(`Can not make request to: ${SERVER_BASE_URL}`);
+
+      res.sendStatus(404);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log(`ERROR: ${error.message}`);
+
+      res.sendStatus(500);
+    }
+  });
 });
 
 // Server static files from /browser

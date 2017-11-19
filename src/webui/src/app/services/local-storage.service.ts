@@ -1,21 +1,30 @@
 import {Injectable} from '@angular/core';
+import {UtilsService} from './utils.service';
 
 @Injectable()
 export class LocalStorageService {
 
-  constructor() {
+  constructor(private util: UtilsService) {
   }
 
   get(key: string): any {
-    return JSON.parse(localStorage.getItem(key));
+    if (this.util.isPlatformBrowser()) {
+      return JSON.parse(localStorage.getItem(key));
+    }
+    return null;
   }
 
   set(key: string, data: any): void {
-    localStorage.setItem(key, JSON.stringify(data));
+    if (this.util.isPlatformBrowser()) {
+      localStorage.setItem(key, JSON.stringify(data));
+    }
   }
 
   remove(key: string): boolean {
-    localStorage.removeItem(key);
-    return this.get(key).isEmpty();
+    if (this.util.isPlatformBrowser()) {
+      localStorage.removeItem(key);
+      return !!this.get(key);
+    }
+    return false;
   }
 }
