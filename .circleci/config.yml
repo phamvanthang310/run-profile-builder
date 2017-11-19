@@ -71,7 +71,7 @@ jobs:
 
       - run:
           name: build universal
-          command: npm run build:ssr
+          command: cd src/webui && npm run build:ssr
 
 workflows:
   version: 2
