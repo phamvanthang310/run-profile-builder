@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {ConfigService} from "../../services/config.service";
+import {ConfigService} from '../../services/config.service';
 import {MatSnackBar} from '@angular/material';
-import {LocalStorageService} from "../../services/local-storage.service";
-import {QaDailyReportComponent} from "../qa-daily-report/qa-daily-report.component";
+import {LocalStorageService} from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-settings',
@@ -30,10 +29,7 @@ export class SettingsComponent implements OnInit {
   applyChanges() {
     this.configService.setSprint(this.sprint);
 
-    //Empty temp data
-    this.localStorage.set(QaDailyReportComponent.DONE_ISSUES_KEY, null);
-    this.localStorage.set(QaDailyReportComponent.IN_PROGRESS_ISSUES_KEY, null);
-
+    // Empty temp data
     this.snackBar.open('Change is applied sucessfully!', null, {
       duration: 1500,
       extraClasses: ['snack-bar', 'success']

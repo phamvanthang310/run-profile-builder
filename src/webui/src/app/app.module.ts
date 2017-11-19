@@ -15,12 +15,9 @@ import {ReleaseDialogComponent} from './release-dialog/release-dialog.component'
 import {ReleaseBuilderService} from './services/release-builder.service';
 import {PullRequestComponent} from './pages/pull-request/pull-request.component';
 import {ConfigService} from './services/config.service';
-import {LocalStorageService} from "./services/local-storage.service";
-import {UtilsService} from "./services/utils.service";
-import {QaDailyReportComponent} from "./pages/qa-daily-report/qa-daily-report.component";
-import {QaDailyReportBuilderService} from "./services/qa-daily-report-builder.service";
-import {DragulaModule} from 'ng2-dragula/ng2-dragula';
-import {DraggableIssueListComponent} from "./draggable-issue-list/draggable-issue-list.component";
+import {LocalStorageService} from './services/local-storage.service';
+import {UtilsService} from './services/utils.service';
+import {QaDailyReportBuilderService} from './services/qa-daily-report-builder.service';
 
 @NgModule({
   declarations: [
@@ -30,18 +27,16 @@ import {DraggableIssueListComponent} from "./draggable-issue-list/draggable-issu
     ErrorPageComponent,
     SettingsComponent,
     ReleaseDialogComponent,
-    PullRequestComponent,
-    QaDailyReportComponent,
-    DraggableIssueListComponent
+    PullRequestComponent
   ],
   imports: [
+    BrowserModule.withServerTransition({appId: 'run-profile-builder'}),
     HttpClientModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    DragulaModule
+    MaterialModule
   ],
   providers: [
     CoreService,
