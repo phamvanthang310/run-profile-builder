@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import _ from 'lodash';
+import {UtilsService} from "./utils.service";
 
 @Injectable()
 export class CoreService {
@@ -12,7 +14,7 @@ export class CoreService {
   private readonly ALL_GIT_PULL_URL = '/api/git';
   private readonly ALL_GIT_REPO = '/api/git/repos';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private utils: UtilsService) {
   }
 
   checkoutProfile(): Observable<string> {
@@ -20,15 +22,15 @@ export class CoreService {
   }
 
   fetchJira(sprint: string): Observable<any> {
-    return this.http.get(this.JIRA_URL, {responseType: 'json', params: {sprint}});
+    return this.http.get(this.buildUrl(this.JIRA_URL, {sprint}), {responseType: 'json'});
   }
 
   getJiraIssue(id: string): Observable<any> {
-    return this.http.get(this.JIRA_BY_ID_URL, {responseType: 'json', params: {id}});
+    return this.http.get(this.buildUrl(this.JIRA_BY_ID_URL, {id}), {responseType: 'json'});
   }
 
   fetchGitPull(repoName: string): Observable<any> {
-    return this.http.get(this.GIT_URL, {responseType: 'json', params: {repoName}});
+    return this.http.get(this.buildUrl(this.GIT_URL, {repoName}), {responseType: 'json'});
   }
 
   fetchAllGitPull(): Observable<any> {
@@ -37,5 +39,13 @@ export class CoreService {
 
   fetchAllGitRepos(): Observable<any> {
     return this.http.get(this.ALL_GIT_REPO, {responseType: 'json'});
+  }
+
+  private buildUrl(url: string, params: any): string {
+    if (this.utils.isPlatformBrowser()) {
+      const complied = _.template(url);
+      return complied(params);
+    }
+    return '';
   }
 }

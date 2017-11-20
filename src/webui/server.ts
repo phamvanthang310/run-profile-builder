@@ -19,9 +19,9 @@ enableProdMode();
 // Express server
 const app = express();
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 9000;
 const DIST_FOLDER = join(process.cwd(), 'dist');
-const SERVER_BASE_URL = 'http://localhost:9000';
+const SERVER_BASE_URL = 'http://localhost:4000';
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack
 const {AppServerModuleNgFactory, LAZY_MODULE_MAP} = require('./dist/server/main.bundle');
 
@@ -37,15 +37,12 @@ app.set('view engine', 'html');
 app.set('views', join(DIST_FOLDER, 'browser'));
 
 app.get('/api/*', (req, res) => {
-  console.log('Request URL:', req.originalUrl);
-  console.log('Request Type:', req.method);
-
   // Redirect all request to java server.
   axios({
     baseURL: SERVER_BASE_URL,
     method: req.method,
     url: req.originalUrl,
-    timeout: 2000 // 2 secs
+    timeout: 20000 // 20 secs
   }).then(response => {
     res.status(response.status).send(response.data);
   }).catch(error => {
